@@ -10,6 +10,7 @@ import {
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 
 export default function Home() {
   return (
@@ -52,20 +53,7 @@ export default function Home() {
                   </defs>
                 </svg>
               }
-              endContent={
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.00008 12.125L3.79175 6.91667L4.52091 6.1875L9.00008 10.6667L13.4792 6.1875L14.2084 6.91667L9.00008 12.125Z"
-                    fill="#F4F4F6"
-                  />
-                </svg>
-              }
+              endContent={<ChevronDownIcon />}
               as={Link}
               color="secondary"
               href="#"
