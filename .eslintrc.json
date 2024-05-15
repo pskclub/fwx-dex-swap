@@ -1,3 +1,106 @@
 {
-  "extends": "next/core-web-vitals"
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
+  "plugins": [
+    "unused-imports"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    "standard-with-typescript",
+    "plugin:prettier/recommended",
+    "plugin:tailwindcss/recommended"
+  ],
+  "rules": {
+    "tailwindcss/no-custom-classname": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-require-imports": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-extraneous-class": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/return-await": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "interface",
+        "next": "*"
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "func-call-spacing": "off",
+    "func-style": "error",
+    "prefer-arrow-callback": "error",
+    "no-param-reassign": "error",
+    "dot-notation": "error",
+    "no-else-return": "error",
+    "no-multi-assign": "error",
+    "radix": "error",
+    "no-new-wrappers": "error",
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": [
+          "block-like",
+          "multiline-expression",
+          "multiline-const",
+          "multiline-let"
+        ],
+        "next": "*"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": [
+          "block-like",
+          "export",
+          "break"
+        ]
+      },
+      {
+        "blankLine": "always",
+        "prev": [
+          "const",
+          "let"
+        ],
+        "next": "expression"
+      }
+    ],
+    "operator-linebreak": "error",
+    "no-case-declarations": "error",
+    "no-unneeded-ternary": "error",
+    "nonblock-statement-body-position": "error",
+    "quotes": "error",
+    "newline-before-return": "error",
+    "import/named": "off",
+    "import/namespace": "off",
+    "import/newline-after-import": "error",
+    "import/no-named-as-default-member": "off",
+    "no-prototype-builtins": "off",
+    "no-useless-escape": "off",
+    "prefer-regex-literals": "off",
+    "require-await": "off",
+    "unused-imports/no-unused-imports": "error"
+  }
 }
