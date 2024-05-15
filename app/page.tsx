@@ -1,12 +1,19 @@
-import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+import {
+  Button,
+  Card,
+  CardBody,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from '@nextui-org/react'
 import React from 'react'
 import Link from 'next/link'
-import { Card } from '@nextui-org/card'
 
 export default function Home() {
   return (
     <>
-      <Navbar maxWidth={'2xl'} className={'mb-4 bg-foreground text-white'}>
+      <Navbar maxWidth={'2xl'} className={'mb-4 bg-background text-white'}>
         <NavbarBrand>
           <img src={'/logo.png'} className={'h-[15px]'} alt={'logo'} />
         </NavbarBrand>
@@ -58,10 +65,13 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <Card className={'border bg-foreground p-4'}>
-          <Button radius={'sm'} fullWidth color="primary" size={'lg'}>
-            Connect Wallet
-          </Button>
+        <Card className={'border border-[#242438] bg-background'}>
+          <CardBody>
+            <h1>fsdgsdfgsdfgsdf</h1>
+            <Button radius={'sm'} fullWidth color="primary" size={'lg'}>
+              Connect Wallet
+            </Button>
+          </CardBody>
         </Card>
       </div>
     </>
