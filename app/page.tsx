@@ -9,16 +9,23 @@ import {
 } from '@nextui-org/react'
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Home() {
   return (
     <>
       <Navbar maxWidth={'2xl'} className={'mb-4 bg-background text-white'}>
         <NavbarBrand>
-          <img src={'/logo.png'} className={'h-[15px]'} alt={'logo'} />
+          <Image
+            src={'/logo.png'}
+            className={'h-[15px]'}
+            alt={'logo'}
+            width={50.08}
+            height={14.59}
+          />
         </NavbarBrand>
         <NavbarContent justify="end">
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem className="flex">
             <Button
               startContent={
                 <svg
@@ -66,7 +73,7 @@ export default function Home() {
               size={'sm'}
               className={'font-semibold'}
             >
-              Avalanche Fuji
+              <span className={'hidden md:flex'}>Avalanche Fuji</span>
             </Button>
           </NavbarItem>
           <NavbarItem>
