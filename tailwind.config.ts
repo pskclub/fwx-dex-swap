@@ -24,7 +24,9 @@ const config: Config = {
         light: {
           // ...
           colors: {
+            foreground: '#151522',
             primary: {
+              foreground: 'white',
               DEFAULT: '#9D4EDD',
               50: '#F2E8FB',
               100: '#E9D7F7',
@@ -36,6 +38,20 @@ const config: Config = {
               700: '#641E9D',
               800: '#46156E',
               900: '#280C3F',
+            },
+            secondary: {
+              foreground: 'white',
+              DEFAULT: '#242438',
+              50: '#7070A3',
+              100: '#64649B',
+              200: '#545483',
+              300: '#44446A',
+              400: '#343451',
+              500: '#242438',
+              600: '#0E0E16',
+              700: '#000000',
+              800: '#000000',
+              900: '#000000',
             },
           },
         },
