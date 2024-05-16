@@ -7,6 +7,7 @@ export const config = createConfig({
   storage: createStorage({
     storage: cookieStorage,
   }),
+  // connectors: [metaMask(), coinbaseWallet({})],
   transports: {
     [mainnet.id]: http(),
     [sepolia.id]: http(),
