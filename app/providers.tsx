@@ -12,10 +12,8 @@ interface Props {
 
 const queryClient = new QueryClient()
 
-export function Providers({ children, initialState }: Props) {
-  return (
-    <WagmiProvider config={config} initialState={initialState}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiProvider>
-  )
-}
+export const Providers = ({ children, initialState }: Props) => (
+  <WagmiProvider config={config} initialState={initialState}>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  </WagmiProvider>
+)
