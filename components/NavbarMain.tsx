@@ -1,15 +1,122 @@
-import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+'use client'
+
+import {
+  Button,
+  Divider,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  useDisclosure,
+} from '@nextui-org/react'
 import Image from 'next/image'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import React from 'react'
+import { useAccount, useConnect } from 'wagmi'
+import { config } from '@/config'
+import { injected } from '@wagmi/core'
+import truncateEthAddress from 'truncate-eth-address'
 
 export const NavbarMain = () => {
+  const account = useAccount()
+
+  const { connect } = useConnect({
+    config,
+  })
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+
+  const onConnect = () => {
+    connect({ connector: injected() })
+  }
+
   return (
     <Navbar
       maxWidth={'2xl'}
       className={'mb-4 border-b border-[#242438] bg-background text-white md:border-0'}
     >
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        classNames={{
+          base: [
+            'flex',
+            'flex-col',
+            'relative',
+            'bg-secondary',
+            'z-50',
+            'w-full',
+            'box-border',
+            'outline-none',
+            'mx-1',
+            'my-1',
+            'sm:mx-6',
+            'sm:my-16',
+          ],
+          closeButton: [
+            'absolute',
+            'appearance-none',
+            'outline-none',
+            'select-none',
+            'top-1',
+            'right-1',
+            'rtl:left-1',
+            'rtl:right-[unset]',
+            'p-2',
+            'text-foreground',
+            'rounded-full',
+            'bg-transparent',
+            'hover:bg-transparent',
+            'active:bg-transparent',
+            '[&>svg]:w-[24px] [&>svg]:h-[24px]',
+          ],
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Connect Wallet</ModalHeader>
+              <ModalBody className={'py-6'}>
+                <div className={'flex items-center justify-between text-center'}>
+                  <div className={'cursor-pointer'} onClick={onConnect}>
+                    <img src={'/metamask.png'} alt={'metamask'} className={'mx-auto w-[64px]'} />
+                    <p className={'mt-2 text-sm font-medium'}>Metamask</p>
+                  </div>
+                  <div className={'cursor-pointer'} onClick={onConnect}>
+                    <img src={'/rainbow.png'} alt={'rainbow'} className={'mx-auto w-[64px]'} />
+                    <p className={'mt-2 text-sm font-medium'}>Rainbow</p>
+                  </div>
+                  <div className={'cursor-pointer'} onClick={onConnect}>
+                    <img src={'/coinbase.png'} alt={'coinbase'} className={'mx-auto w-[64px]'} />
+                    <p className={'mt-2 text-sm font-medium'}>Coinbase</p>
+                  </div>
+                </div>
+                <Divider />
+                <div className={'text-center'}>
+                  <p className={'font-bold'}>What is wallet</p>
+                  <p className={'mt-3 text-sm text-gray-400'}>
+                    What is wallet What is walletWhat is wallet What is walletWhat is wallet What is
+                    wallet
+                  </p>
+                </div>
+                <div className={'flex space-x-3'}>
+                  <Button radius={'sm'} fullWidth color={'secondary'} className={'bg-[#373751]'}>
+                    Get wallet
+                  </Button>
+                  <Button radius={'sm'} fullWidth color={'secondary'} className={'bg-[#373751]'}>
+                    Learn more
+                  </Button>
+                </div>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
       <NavbarBrand>
         <Image src={'/logo.png'} className={'h-[15px]'} alt={'logo'} width={50.08} height={14.59} />
       </NavbarBrand>
@@ -49,20 +156,34 @@ export const NavbarMain = () => {
             size={'sm'}
             className={'font-medium'}
           >
-            <span className={'hidden md:flex'}>Avalanche Fuji</span>
+            <span className={'hidden md:flex'}>PskCluB</span>
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button
-            className={'font-medium'}
-            as={Link}
-            color="primary"
-            href="#"
-            radius={'full'}
-            size={'sm'}
-          >
-            Connect Wallet
-          </Button>
+          {account.isConnected ? (
+            <Button
+              className={'bg-[#373751] font-medium '}
+              as={Link}
+              color="primary"
+              href="#"
+              radius={'full'}
+              size={'sm'}
+            >
+              {truncateEthAddress(account.address || '')}
+            </Button>
+          ) : (
+            <Button
+              onClick={onOpen}
+              className={'font-medium'}
+              as={Link}
+              color="primary"
+              href="#"
+              radius={'full'}
+              size={'sm'}
+            >
+              Connect Wallet
+            </Button>
+          )}
         </NavbarItem>
       </NavbarContent>
     </Navbar>
