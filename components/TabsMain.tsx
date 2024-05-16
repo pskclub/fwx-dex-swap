@@ -66,7 +66,7 @@ export const TabsMain = () => {
         </Button>
       </div>
       <Card className={'mt-4 rounded-[20px] border-1.5 border-[#242438] bg-background'}>
-        <CardBody>
+        <CardBody className={'px-3 py-4'}>
           {activeTab === 'swap' && <Swap />}
           {activeTab === 'add' && <AddLiquidity />}
           {activeTab === 'remove' && <RemoveLiquidity />}

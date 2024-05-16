@@ -6,11 +6,14 @@ import React from 'react'
 
 export const NavbarMain = () => {
   return (
-    <Navbar maxWidth={'2xl'} className={'mb-4 bg-background text-white'}>
+    <Navbar
+      maxWidth={'2xl'}
+      className={'mb-4 border-b border-[#242438] bg-background text-white md:border-0'}
+    >
       <NavbarBrand>
         <Image src={'/logo.png'} className={'h-[15px]'} alt={'logo'} width={50.08} height={14.59} />
       </NavbarBrand>
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className={'gap-2 md:gap-3'}>
         <NavbarItem className="flex">
           <Button
             startContent={
