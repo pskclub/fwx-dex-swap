@@ -3,13 +3,11 @@ import './globals.css'
 import { NextUIProvider } from '@nextui-org/react'
 import localFont from 'next/font/local'
 import { Faire } from '@/components/Faire'
-import { QueryClient } from '@tanstack/react-query'
 import { Providers } from '@/app/providers'
 import { cookieToInitialState } from 'wagmi'
 import { config } from '@/config'
 import { headers } from 'next/headers'
 
-const queryClient = new QueryClient()
 const myFont = localFont({
   display: 'swap',
   src: [
