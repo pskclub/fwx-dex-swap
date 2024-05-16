@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Card, CardBody } from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import React from 'react'
 import classNames from 'classnames'
 import { Swap } from '@/features/Swap'
@@ -65,13 +65,10 @@ export const TabsMain = () => {
           <span className={'md:hidden'}>Liq.</span>
         </Button>
       </div>
-      <Card className={'mt-4 rounded-[20px] border-1.5 border-[#242438] bg-background'}>
-        <CardBody className={'px-3 py-4'}>
-          {activeTab === 'swap' && <Swap />}
-          {activeTab === 'add' && <AddLiquidity />}
-          {activeTab === 'remove' && <RemoveLiquidity />}
-        </CardBody>
-      </Card>
+
+      {activeTab === 'swap' && <Swap />}
+      {activeTab === 'add' && <AddLiquidity />}
+      {activeTab === 'remove' && <RemoveLiquidity />}
     </>
   )
 }
