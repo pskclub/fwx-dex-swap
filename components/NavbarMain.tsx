@@ -32,7 +32,14 @@ export const NavbarMain = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   const onConnect = () => {
-    connect({ connector: injected() })
+    connect(
+      { connector: injected() },
+      {
+        onSuccess: () => {
+          onOpenChange()
+        },
+      }
+    )
   }
 
   return (
