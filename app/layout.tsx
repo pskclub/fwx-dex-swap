@@ -3,7 +3,13 @@ import './globals.css'
 import { NextUIProvider } from '@nextui-org/react'
 import localFont from 'next/font/local'
 import { Faire } from '@/components/Faire'
+import { QueryClient } from '@tanstack/react-query'
+import { Providers } from '@/app/providers'
+import { cookieToInitialState } from 'wagmi'
+import { config } from '@/config'
+import { headers } from 'next/headers'
 
+const queryClient = new QueryClient()
 const myFont = localFont({
   display: 'swap',
   src: [
@@ -41,13 +47,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const initialState = cookieToInitialState(config, headers().get('cookie'))
+
   return (
     <html lang="en">
       <body className={myFont.className}>
         <div className={'fixed hidden size-full items-center justify-center md:flex'}>
           <Faire />
         </div>
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider>
+          <Providers initialState={initialState}>{children}</Providers>
+        </NextUIProvider>
       </body>
     </html>
   )
