@@ -1,6 +1,8 @@
+'use client'
+
 import React from 'react'
 import { Button, Card, CardBody, Chip, Input } from '@nextui-org/react'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 
 const inputClassNames = {
   label:
@@ -26,6 +28,8 @@ const inputClassNames = {
 }
 
 export const Swap = () => {
+  const [expand, setExpand] = React.useState(false)
+
   return (
     <Card className={'mt-4 rounded-[20px] border-1.5 border-[#242438] bg-background'}>
       <CardBody className={'px-3 py-4'}>
@@ -97,13 +101,24 @@ export const Swap = () => {
         </div>
         <div className={'mt-4 rounded-[12px] border border-divider'}>
           <div
-            className={'flex cursor-pointer items-center justify-between p-3 text-xs text-gray-300'}
+            onClick={() => {
+              setExpand(!expand)
+            }}
+            className={
+              'flex cursor-pointer select-none items-center justify-between p-3 text-xs text-gray-300'
+            }
           >
             <div className={'flex items-center'}>
-              <p>Max. Slippage</p>
-              <Chip className={'ml-2'} size={'sm'} radius={'sm'} color={'secondary'}>
-                1%
-              </Chip>
+              {!expand ? (
+                <>
+                  <p>Max. Slippage</p>
+                  <Chip className={'ml-2'} size={'sm'} radius={'sm'} color={'secondary'}>
+                    1%
+                  </Chip>
+                </>
+              ) : (
+                <p className={'text-xs text-gray-50'}>1 B4FWX = 0.00000007970 USDC</p>
+              )}
             </div>
             <div className={'flex items-center'}>
               <svg
@@ -121,33 +136,39 @@ export const Swap = () => {
               </svg>
 
               <p>$0.03</p>
-              <ChevronDownIcon className={'ml-2 size-[20px]'} />
+              {expand ? (
+                <ChevronUpIcon className={'ml-2 size-[20px]'} />
+              ) : (
+                <ChevronDownIcon className={'ml-2 size-[20px]'} />
+              )}
             </div>
           </div>
-          <div className={'space-y-2 px-3 pb-3'}>
-            <div className={'flex items-center justify-between'}>
-              <p className={'text-xs text-gray-300'}>Max. Slippage</p>
-              <Chip size={'sm'} radius={'sm'} color={'secondary'}>
-                1%
-              </Chip>
+          {expand && (
+            <div className={'space-y-2 px-3 pb-3'}>
+              <div className={'flex items-center justify-between'}>
+                <p className={'text-xs text-gray-300'}>Max. Slippage</p>
+                <Chip size={'sm'} radius={'sm'} color={'secondary'}>
+                  1%
+                </Chip>
+              </div>
+              <div className={'flex items-center justify-between'}>
+                <p className={'text-xs text-gray-300'}>Expected Output</p>
+                <p className={'text-sm text-gray-50'}>0.05 USDC</p>
+              </div>
+              <div className={'flex items-center justify-between'}>
+                <p className={'text-xs text-gray-300'}>Minimum Received</p>
+                <p className={'text-sm text-gray-50'}>0.0498 USDC</p>
+              </div>
+              <div className={'flex items-center justify-between'}>
+                <p className={'text-xs text-gray-300'}>Price Impact</p>
+                <p className={'text-sm text-gray-50'}>0.01%</p>
+              </div>
+              <div className={'flex items-center justify-between'}>
+                <p className={'text-xs text-gray-300'}>Fee</p>
+                <p className={'text-sm text-gray-50'}>$0.6249</p>
+              </div>
             </div>
-            <div className={'flex items-center justify-between'}>
-              <p className={'text-xs text-gray-300'}>Expected Output</p>
-              <p className={'text-sm text-gray-50'}>0.05 USDC</p>
-            </div>
-            <div className={'flex items-center justify-between'}>
-              <p className={'text-xs text-gray-300'}>Minimum Received</p>
-              <p className={'text-sm text-gray-50'}>0.0498 USDC</p>
-            </div>
-            <div className={'flex items-center justify-between'}>
-              <p className={'text-xs text-gray-300'}>Price Impact</p>
-              <p className={'text-sm text-gray-50'}>0.01%</p>
-            </div>
-            <div className={'flex items-center justify-between'}>
-              <p className={'text-xs text-gray-300'}>Fee</p>
-              <p className={'text-sm text-gray-50'}>$0.6249</p>
-            </div>
-          </div>
+          )}
         </div>
         <Button
           className={'mt-4 text-xl font-semibold'}
