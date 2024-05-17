@@ -25,7 +25,7 @@ export const TabsMain = () => {
           radius={'full'}
           color="primary"
           size={'lg'}
-          className={classNames('font-medium px-5', {
+          className={classNames('font-medium px-[12px] py-[16px]', {
             [activeClassName]: activeTab === 'swap',
             [defaultClassName]: activeTab !== 'swap',
           })}
@@ -39,7 +39,7 @@ export const TabsMain = () => {
           radius={'full'}
           color="primary"
           size={'lg'}
-          className={classNames('font-medium px-5', {
+          className={classNames('font-medium px-[12px] py-[16px]', {
             [activeClassName]: activeTab === 'add',
             [defaultClassName]: activeTab !== 'add',
           })}
@@ -55,7 +55,7 @@ export const TabsMain = () => {
           radius={'full'}
           color="primary"
           size={'lg'}
-          className={classNames('font-medium px-5', {
+          className={classNames('font-medium px-[12px] py-[16px]', {
             [activeClassName]: activeTab === 'remove',
             [defaultClassName]: activeTab !== 'remove',
           })}

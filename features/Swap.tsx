@@ -32,7 +32,7 @@ export const Swap = () => {
 
   return (
     <Card className={'mt-4 rounded-[20px] border-1.5 border-[#242438] bg-background'}>
-      <CardBody className={'px-3 py-4'}>
+      <CardBody className={'p-[20px]'}>
         <div>
           <div className={'flex items-center justify-between'}>
             <p className={'text-sm text-gray-200'}>You pay</p>
@@ -46,7 +46,7 @@ export const Swap = () => {
             classNames={inputClassNames}
             endContent={
               <Button
-                startContent={<img src="/currency/b4fwx.png" alt="b4fwx" className={'h-[16px]'} />}
+                startContent={<img src="/currency/b4fwx.png" alt="b4fwx" className={'h-[12px]'} />}
                 radius={'full'}
                 size={'sm'}
                 className={
@@ -87,7 +87,7 @@ export const Swap = () => {
             classNames={inputClassNames}
             endContent={
               <Button
-                startContent={<img src="/currency/usdc.png" alt="b4fwx" className={'h-[16px]'} />}
+                startContent={<img src="/currency/usdc.png" alt="b4fwx" className={'h-[12px]'} />}
                 radius={'full'}
                 size={'sm'}
                 className={

@@ -45,7 +45,7 @@ export const RemoveLiquidity = () => {
         </Chip>
       </div>
       <Card className={'mt-4 rounded-[20px] border-1.5 border-[#242438] bg-background'}>
-        <CardBody className={'px-3 py-4'}>
+        <CardBody className={'p-[20px]'}>
           <div className={'space-y-4'}>
             <div>
               <div className={'mb-2 flex items-center justify-between'}>
@@ -118,11 +118,7 @@ export const RemoveLiquidity = () => {
                   'mb-3 flex w-full flex-1 cursor-pointer items-center rounded-[12px] border border-divider p-3 text-xs text-gray-300 md:mb-0 md:justify-center md:space-x-3'
                 }
               >
-                <img
-                  src="/currency/b4fwx.png"
-                  alt="b4fwx"
-                  className={'mr-3 h-[32px] md:mr-0 md:h-[16px]'}
-                />
+                <img src="/currency/b4fwx.png" alt="b4fwx" className={'mr-3 h-[32px] md:mr-0'} />
                 <div>
                   <p className={'text-sm font-medium'}>
                     100,000 <span className={'text-gray-400'}>B4FWX</span>
@@ -136,11 +132,7 @@ export const RemoveLiquidity = () => {
                   'mb-3 flex w-full flex-1 cursor-pointer items-center rounded-[12px] border border-divider p-3 text-xs text-gray-300 md:mb-0 md:justify-center md:space-x-3'
                 }
               >
-                <img
-                  src="/currency/usdc.png"
-                  alt="b4fwx"
-                  className={'mr-3 h-[32px] md:mr-0 md:h-[16px]'}
-                />
+                <img src="/currency/usdc.png" alt="b4fwx" className={'mr-3 h-[32px] md:mr-0'} />
                 <div>
                   <p className={'text-sm font-medium'}>
                     100,000 <span className={'text-gray-400'}>USDC</span>
