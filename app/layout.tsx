@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { NextUIProvider } from '@nextui-org/react'
 import localFont from 'next/font/local'
-import { Faire } from '@/components/Faire'
 import { Providers } from '@/app/providers'
 import { cookieToInitialState } from 'wagmi'
 import { config } from '@/config'
@@ -50,9 +49,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={myFont.className}>
-        <div className={'fixed hidden size-full items-center justify-center md:flex'}>
-          <Faire />
-        </div>
         <NextUIProvider>
           <Providers initialState={initialState}>{children}</Providers>
         </NextUIProvider>
