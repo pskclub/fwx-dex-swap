@@ -98,24 +98,53 @@ export const AddLiquidity = () => {
           </div>
           <div className={'mt-4'}>
             <p className={'text-sm text-gray-50'}>Deposit Balance</p>
-            <div className={'mt-3 flex items-center space-x-2'}>
+            <div className={'mt-3 flex flex-col items-center space-x-2 md:flex-row'}>
               <div
                 className={
-                  'flex flex-1 cursor-pointer items-center justify-between rounded-[12px] border border-divider p-3 text-xs text-gray-300'
+                  'mb-3 flex w-full flex-1 cursor-pointer items-center rounded-[12px] border border-divider p-3 text-xs text-gray-300 md:mb-0 md:justify-center md:space-x-3'
                 }
               >
-                100,000 B4FWX
+                <img
+                  src="/currency/b4fwx.png"
+                  alt="b4fwx"
+                  className={'mr-3 h-[32px] md:mr-0 md:h-[16px]'}
+                />
+                <div>
+                  <p className={'text-sm font-medium'}>
+                    100,000 <span className={'text-gray-400'}>B4FWX</span>
+                  </p>
+                  <p className={'mt-1 text-xs text-gray-400'}>100,000 B4FWX</p>
+                </div>
               </div>
-              <PlusIcon className={'size-[24px]'} />
+              <PlusIcon className={'hidden size-[24px] md:flex'} />
               <div
                 className={
-                  'flex flex-1 cursor-pointer items-center justify-between rounded-[12px] border border-divider p-3 text-xs text-gray-300'
+                  'mb-3 flex w-full flex-1 cursor-pointer items-center rounded-[12px] border border-divider p-3 text-xs text-gray-300 md:mb-0 md:justify-center md:space-x-3'
                 }
               >
-                100,000 B4FWX
+                <img
+                  src="/currency/usdc.png"
+                  alt="b4fwx"
+                  className={'mr-3 h-[32px] md:mr-0 md:h-[16px]'}
+                />
+                <div>
+                  <p className={'text-sm font-medium'}>
+                    100,000 <span className={'text-gray-400'}>USDC</span>
+                  </p>
+                  <p className={'mt-1 text-xs text-gray-400'}>100,000 B4FWX</p>
+                </div>
               </div>
             </div>
           </div>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Approve B4FWX
+          </Button>
           <Button
             className={'mt-4 text-xl font-semibold'}
             color={'primary'}

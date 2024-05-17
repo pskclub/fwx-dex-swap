@@ -124,6 +124,30 @@ export const Swap = () => {
               <ChevronDownIcon className={'ml-2 size-[20px]'} />
             </div>
           </div>
+          <div className={'space-y-2 px-3 pb-3'}>
+            <div className={'flex items-center justify-between'}>
+              <p className={'text-xs text-gray-300'}>Max. Slippage</p>
+              <Chip size={'sm'} radius={'sm'} color={'secondary'}>
+                1%
+              </Chip>
+            </div>
+            <div className={'flex items-center justify-between'}>
+              <p className={'text-xs text-gray-300'}>Expected Output</p>
+              <p className={'text-sm text-gray-50'}>0.05 USDC</p>
+            </div>
+            <div className={'flex items-center justify-between'}>
+              <p className={'text-xs text-gray-300'}>Minimum Received</p>
+              <p className={'text-sm text-gray-50'}>0.0498 USDC</p>
+            </div>
+            <div className={'flex items-center justify-between'}>
+              <p className={'text-xs text-gray-300'}>Price Impact</p>
+              <p className={'text-sm text-gray-50'}>0.01%</p>
+            </div>
+            <div className={'flex items-center justify-between'}>
+              <p className={'text-xs text-gray-300'}>Fee</p>
+              <p className={'text-sm text-gray-50'}>$0.6249</p>
+            </div>
+          </div>
         </div>
         <Button
           className={'mt-4 text-xl font-semibold'}

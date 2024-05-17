@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, Chip, Input } from '@nextui-org/react'
-import { PlusIcon } from '@heroicons/react/16/solid'
+import { ArrowDownIcon, PlusIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 
 const inputClassNames = {
@@ -58,40 +58,95 @@ export const RemoveLiquidity = () => {
                 radius={'sm'}
                 placeholder="Enter amount"
                 classNames={inputClassNames}
-                endContent={
-                  <Button
-                    startContent={
-                      <img src="/currency/b4fwx.png" alt="b4fwx" className={'h-[16px]'} />
-                    }
-                    radius={'full'}
-                    size={'sm'}
-                    className={
-                      'border-1.5 border-[#242438] bg-background text-gray-50 hover:bg-primary/10 hover:text-[#BD6CFF]'
-                    }
-                  >
-                    B4FWX
-                  </Button>
-                }
               />
+              <div className={'mt-4 flex space-x-2'}>
+                <Chip
+                  size={'lg'}
+                  radius={'full'}
+                  color={'secondary'}
+                  className={'w-full max-w-full text-center'}
+                >
+                  25%
+                </Chip>
+                <Chip
+                  size={'lg'}
+                  radius={'full'}
+                  color={'secondary'}
+                  className={'w-full max-w-full text-center'}
+                >
+                  50%
+                </Chip>
+                <Chip
+                  size={'lg'}
+                  radius={'full'}
+                  color={'secondary'}
+                  className={'w-full max-w-full text-center'}
+                >
+                  75%
+                </Chip>
+                <Chip
+                  size={'lg'}
+                  radius={'full'}
+                  color={'secondary'}
+                  className={'w-full max-w-full text-center'}
+                >
+                  100%
+                </Chip>
+              </div>
+            </div>
+          </div>
+          <ArrowDownIcon className={'mx-auto my-4 size-[16px]'} />
+          <div
+            className={
+              'space-y-2 rounded-[12px] border-1.5 border-[#242438] bg-background p-3 text-sm'
+            }
+          >
+            <div className={'flex items-center justify-between'}>
+              <p>50,000</p>
+              <p>B4FWX</p>
+            </div>
+            <div className={'flex items-center justify-between'}>
+              <p>50,000</p>
+              <p>USDC</p>
             </div>
           </div>
           <div className={'mt-4'}>
             <p className={'text-sm text-gray-50'}>Deposit Balance</p>
-            <div className={'mt-3 flex items-center space-x-2'}>
+            <div className={'mt-3 flex flex-col items-center space-x-2 md:flex-row'}>
               <div
                 className={
-                  'flex flex-1 cursor-pointer items-center justify-between rounded-[12px] border border-divider p-3 text-xs text-gray-300'
+                  'mb-3 flex w-full flex-1 cursor-pointer items-center rounded-[12px] border border-divider p-3 text-xs text-gray-300 md:mb-0 md:justify-center md:space-x-3'
                 }
               >
-                100,000 B4FWX
+                <img
+                  src="/currency/b4fwx.png"
+                  alt="b4fwx"
+                  className={'mr-3 h-[32px] md:mr-0 md:h-[16px]'}
+                />
+                <div>
+                  <p className={'text-sm font-medium'}>
+                    100,000 <span className={'text-gray-400'}>B4FWX</span>
+                  </p>
+                  <p className={'mt-1 text-xs text-gray-400'}>100,000 B4FWX</p>
+                </div>
               </div>
-              <PlusIcon className={'size-[24px]'} />
+              <PlusIcon className={'hidden size-[24px] md:flex'} />
               <div
                 className={
-                  'flex flex-1 cursor-pointer items-center justify-between rounded-[12px] border border-divider p-3 text-xs text-gray-300'
+                  'mb-3 flex w-full flex-1 cursor-pointer items-center rounded-[12px] border border-divider p-3 text-xs text-gray-300 md:mb-0 md:justify-center md:space-x-3'
                 }
               >
-                100,000 B4FWX
+                <img
+                  src="/currency/usdc.png"
+                  alt="b4fwx"
+                  className={'mr-3 h-[32px] md:mr-0 md:h-[16px]'}
+                />
+                <div>
+                  <p className={'text-sm font-medium'}>
+                    100,000 <span className={'text-gray-400'}>USDC</span>
+                  </p>
+                  <p className={'mt-1 text-xs text-gray-400'}>100,000 B4FWX</p>
+                </div>
               </div>
             </div>
           </div>
