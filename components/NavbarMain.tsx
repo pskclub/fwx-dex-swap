@@ -19,17 +19,22 @@ import Link from 'next/link'
 import React from 'react'
 import { useAccount, useConnect } from 'wagmi'
 import { config } from '@/config'
-import { injected } from '@wagmi/core'
+import { disconnect, getAccount, injected } from '@wagmi/core'
 import truncateEthAddress from 'truncate-eth-address'
 
 export const NavbarMain = () => {
   const account = useAccount()
-
+  const { connector } = getAccount(config)
   const { connect } = useConnect({
     config,
   })
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const {
+    isOpen: isDisconnectOpen,
+    onOpen: disconnectOnOpen,
+    onOpenChange: onOpenChangeDisconnect,
+  } = useDisclosure()
 
   const onConnect = () => {
     connect(
@@ -40,6 +45,11 @@ export const NavbarMain = () => {
         },
       }
     )
+  }
+
+  const onDisconnect = async () => {
+    await disconnect(config, { connector })
+    onOpenChangeDisconnect()
   }
 
   return (
@@ -124,6 +134,72 @@ export const NavbarMain = () => {
           )}
         </ModalContent>
       </Modal>
+      <Modal
+        isOpen={isDisconnectOpen}
+        onOpenChange={onOpenChangeDisconnect}
+        classNames={{
+          base: [
+            'flex',
+            'flex-col',
+            'relative',
+            'bg-secondary',
+            'z-50',
+            'w-full',
+            'box-border',
+            'outline-none',
+            'mx-1',
+            'my-1',
+            'sm:mx-6',
+            'sm:my-16',
+          ],
+          closeButton: [
+            'absolute',
+            'appearance-none',
+            'outline-none',
+            'select-none',
+            'top-1',
+            'right-1',
+            'rtl:left-1',
+            'rtl:right-[unset]',
+            'p-2',
+            'text-foreground',
+            'rounded-full',
+            'bg-transparent',
+            'hover:bg-transparent',
+            'active:bg-transparent',
+            '[&>svg]:w-[24px] [&>svg]:h-[24px]',
+          ],
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalBody className={'py-6'}>
+                <div className={'my-4'}>
+                  <p className={'text-center font-medium'}>
+                    {truncateEthAddress(account.address || '')}
+                  </p>
+                  <p className={'text-center text-sm font-medium'}>$12,023.02</p>
+                </div>
+                <div className={'flex space-x-3'}>
+                  <Button radius={'sm'} fullWidth color={'secondary'} className={'bg-[#373751]'}>
+                    Copy Address
+                  </Button>
+                  <Button
+                    radius={'sm'}
+                    fullWidth
+                    color={'secondary'}
+                    className={'bg-[#373751]'}
+                    onClick={onDisconnect}
+                  >
+                    Disconnect
+                  </Button>
+                </div>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
       <NavbarBrand>
         <Image src={'/logo.png'} className={'h-[15px]'} alt={'logo'} width={50.08} height={14.59} />
       </NavbarBrand>
@@ -169,6 +245,7 @@ export const NavbarMain = () => {
         <NavbarItem>
           {account.isConnected ? (
             <Button
+              onClick={disconnectOnOpen}
               className={'bg-[#373751] font-medium '}
               as={Link}
               color="primary"
