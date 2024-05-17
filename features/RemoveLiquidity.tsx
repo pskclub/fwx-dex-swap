@@ -2,6 +2,8 @@ import { Button, Chip, Input } from '@nextui-org/react'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 import { CardMain } from '@/components/CardMain'
+import { CopyIcon } from '@/components/icons/CopyIcon'
+import { OutIcon } from '@/components/icons/OutIcon'
 
 const inputClassNames = {
   input: [
@@ -30,18 +32,29 @@ export const RemoveLiquidity = () => {
   return (
     <div className={'mt-4'}>
       <div className={'flex gap-3'}>
-        <Chip size={'md'} radius={'sm'} color={'secondary'} className={'w-full max-w-full'}>
-          Liquidity $1,678,432
+        <Chip size={'md'} radius={'md'} color={'secondary'} className={'w-full max-w-full'}>
+          <span className={'text-sm text-gray-400'}>Liquidity</span>{' '}
+          <span className={'font-semibold'}>$1,678,432</span>
         </Chip>
-        <Chip size={'md'} radius={'sm'} color={'secondary'} className={'w-full max-w-full'}>
-          APR (24h) 189.96%
+        <Chip size={'md'} radius={'md'} color={'secondary'} className={'w-full max-w-full'}>
+          <span className={'text-sm text-gray-400'}>APR (24h)</span>{' '}
+          <span className={'font-semibold'}>189.96%</span>
         </Chip>
       </div>
-      <div className={'mt-4 flex space-x-3'}>
-        <Chip size={'sm'} radius={'sm'} color={'secondary'}>
-          Liquidity $1,678,432
+      <div className={'mt-4 flex space-x-3 text-gray-50'}>
+        <Chip
+          size={'sm'}
+          radius={'full'}
+          color={'secondary'}
+          classNames={{
+            content: 'flex flex-row text-xs items-center',
+          }}
+        >
+          0xAaf8...c086C
+          <CopyIcon className={'ml-1 size-[14px] cursor-pointer text-gray-50'} />
+          <OutIcon className={'ml-1 size-[14px] cursor-pointer text-gray-50'} />
         </Chip>
-        <Chip size={'sm'} radius={'sm'} color={'secondary'}>
+        <Chip size={'sm'} radius={'full'} color={'secondary'} className={'text-xs'}>
           1 B4FWX = 0.00000007970 USDC
         </Chip>
       </div>
