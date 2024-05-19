@@ -123,7 +123,7 @@ export const NavbarMain = () => {
       </NavbarBrand>
       <NavbarContent justify="end" className={'gap-2 md:gap-3'}>
         <NavbarItem className="flex">
-          <Button
+          {/*     <Button
             startContent={
               <svg
                 className={'-ml-1.5 size-[24px]'}
@@ -158,22 +158,9 @@ export const NavbarMain = () => {
             className={'font-medium'}
           >
             <span className={'hidden md:flex'}>PskCluB</span>
-          </Button>
+          </Button> */}
         </NavbarItem>
         <NavbarItem>
-          {/* {account.isConnected ? ( */}
-          {/*  <Button */}
-          {/*    onClick={disconnectOnOpen} */}
-          {/*    className={'bg-[#373751] font-medium '} */}
-          {/*    as={Link} */}
-          {/*    color="primary" */}
-          {/*    href="#" */}
-          {/*    radius={'full'} */}
-          {/*    size={'sm'} */}
-          {/*  > */}
-          {/*    {truncateEthAddress(account.address || '')} */}
-          {/*  </Button> */}
-          {/* ) : ( */}
           <ConnectButton.Custom>
             {({
               account,
@@ -194,7 +181,7 @@ export const NavbarMain = () => {
                 (!authenticationStatus || authenticationStatus === 'authenticated')
 
               return (
-                <div>
+                <div className={'flex items-center'}>
                   {(() => {
                     if (!connected || !ready) {
                       return (
@@ -225,7 +212,7 @@ export const NavbarMain = () => {
                           size={'sm'}
                           className={'font-medium'}
                         >
-                          <span className={'hidden md:flex'}>Wrong network</span>
+                          Wrong network
                         </Button>
                       )
                     }
@@ -325,33 +312,27 @@ export const NavbarMain = () => {
                             )}
                           </ModalContent>
                         </Modal>
-                        {/*  <button
+                        <Button
                           onClick={openChainModal}
-                          style={{ display: 'flex', alignItems: 'center' }}
-                          type="button"
+                          startContent={
+                            chain.iconUrl && (
+                              <img
+                                alt={chain.name ?? 'Chain icon'}
+                                src={chain.iconUrl}
+                                className={'size-[24px]'}
+                              />
+                            )
+                          }
+                          endContent={<ChevronDownIcon />}
+                          as={Link}
+                          color="secondary"
+                          href="#"
+                          radius={'full'}
+                          size={'sm'}
+                          className={'mr-2 font-medium'}
                         >
-                          {chain.hasIcon && (
-                            <div
-                              style={{
-                                background: chain.iconBackground,
-                                width: 12,
-                                height: 12,
-                                borderRadius: 999,
-                                overflow: 'hidden',
-                                marginRight: 4,
-                              }}
-                            >
-                              {chain.iconUrl && (
-                                <img
-                                  alt={chain.name ?? 'Chain icon'}
-                                  src={chain.iconUrl}
-                                  style={{ width: 12, height: 12 }}
-                                />
-                              )}
-                            </div>
-                          )}
                           {chain.name}
-                        </button> */}
+                        </Button>
                         <Button
                           onClick={disconnectOnOpen}
                           className={'bg-[#373751] font-medium '}
