@@ -32,6 +32,10 @@ const myTheme = merge(darkTheme(), {
   colors: {
     accentColor: '#9D4EDD',
     modalBackground: '#242438',
+    modalBorder: 'transparent',
+    closeButtonBackground: 'transparent',
+    actionButtonBorder: 'transparent',
+    closeButton: 'white',
   },
   fonts: {
     body: font.style.fontFamily,
