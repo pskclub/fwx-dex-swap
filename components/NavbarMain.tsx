@@ -18,15 +18,15 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import React from 'react'
 import { useAccount } from 'wagmi'
-import { config } from '@/config'
-import { disconnect } from '@wagmi/core'
+import { disconnect, getAccount } from '@wagmi/core'
 import { CopyIcon } from '@/components/icons/CopyIcon'
 import { MConnectButton } from '@/components/MConnectButton'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { config } from '@/app/providers'
 
 export const NavbarMain = () => {
   const account = useAccount()
-
+  const { connector } = getAccount(config)
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const {
     isOpen: isDisconnectOpen,
@@ -35,12 +35,8 @@ export const NavbarMain = () => {
   } = useDisclosure()
 
   const onDisconnect = async () => {
-    try {
-      await disconnect(config)
-      onOpenChangeDisconnect()
-    } catch (e) {
-      console.error(1111, e)
-    }
+    await disconnect(config, { connector })
+    onOpenChangeDisconnect()
   }
 
   const onCopyAddress = () => {
@@ -323,7 +319,7 @@ export const NavbarMain = () => {
                               />
                             )
                           }
-                          endContent={<ChevronDownIcon />}
+                          endContent={<ChevronDownIcon className={'size-[24px]'} />}
                           as={Link}
                           color="secondary"
                           href="#"
