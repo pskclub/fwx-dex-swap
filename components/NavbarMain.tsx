@@ -274,16 +274,16 @@ export const NavbarMain = () => {
                               <img
                                 alt={chain.name ?? 'Chain icon'}
                                 src={chain.iconUrl}
-                                className={'size-[24px]'}
+                                className={'size-[22px]'}
                               />
                             )
                           }
-                          endContent={<ChevronDownIcon className={'size-[24px]'} />}
+                          endContent={<ChevronDownIcon className={'size-[16px]'} />}
                           color="secondary"
                           href="#"
                           radius={'full'}
                           size={'sm'}
-                          className={'mr-2 font-medium'}
+                          className={'mr-2 px-2 font-medium'}
                         >
                           <span className={'hidden md:flex'}>{chain.name}</span>
                         </Button>
