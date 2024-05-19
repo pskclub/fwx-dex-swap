@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import '@rainbow-me/rainbowkit/styles.css'
 import { NextUIProvider } from '@nextui-org/react'
 import localFont from 'next/font/local'
 import { Providers } from '@/app/providers'
-import { cookieToInitialState } from 'wagmi'
-import { config } from '@/config'
-import { headers } from 'next/headers'
 
 const myFont = localFont({
   display: 'swap',
@@ -44,13 +42,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const initialState = cookieToInitialState(config, headers().get('cookie'))
-
   return (
     <html lang="en">
       <body className={myFont.className}>
         <NextUIProvider>
-          <Providers initialState={initialState}>{children}</Providers>
+          <Providers>{children}</Providers>
         </NextUIProvider>
       </body>
     </html>

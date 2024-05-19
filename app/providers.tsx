@@ -1,19 +1,28 @@
 'use client'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import type { ReactNode } from 'react'
-import { type State, WagmiProvider } from 'wagmi'
-import { config } from '@/config'
+import { WagmiProvider } from 'wagmi'
+import { getDefaultConfig, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { bscTestnet } from 'viem/chains'
 
-interface Props {
-  children: ReactNode
-  initialState: State | undefined
-}
+const { wallets } = getDefaultWallets()
+
+const config = getDefaultConfig({
+  appName: 'FWX Dex',
+  wallets: [...wallets],
+  projectId: '57b485bae5faecdd345994aa2f00654b',
+  chains: [bscTestnet],
+  ssr: true,
+})
 
 const queryClient = new QueryClient()
 
-export const Providers = ({ children, initialState }: Props) => (
-  <WagmiProvider config={config} initialState={initialState}>
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  </WagmiProvider>
-)
+export const Providers = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>{children}</RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  )
+}

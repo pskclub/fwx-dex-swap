@@ -22,6 +22,8 @@ import { config } from '@/config'
 import { disconnect, getAccount, injected } from '@wagmi/core'
 import truncateEthAddress from 'truncate-eth-address'
 import { CopyIcon } from '@/components/icons/CopyIcon'
+import { WalletButton } from '@rainbow-me/rainbowkit'
+import classNames from 'classnames'
 
 export const NavbarMain = () => {
   const account = useAccount()
@@ -105,18 +107,69 @@ export const NavbarMain = () => {
               <ModalHeader className="flex flex-col gap-1">Connect Wallet</ModalHeader>
               <ModalBody className={'py-6'}>
                 <div className={'flex items-center justify-between text-center'}>
-                  <div className={'cursor-pointer'} onClick={onConnect}>
-                    <img src={'/metamask.png'} alt={'metamask'} className={'mx-auto w-[64px]'} />
-                    <p className={'mt-2 text-sm font-medium'}>Metamask</p>
-                  </div>
-                  <div className={'cursor-pointer'} onClick={onConnect}>
-                    <img src={'/rainbow.png'} alt={'rainbow'} className={'mx-auto w-[64px]'} />
-                    <p className={'mt-2 text-sm font-medium'}>Rainbow</p>
-                  </div>
-                  <div className={'cursor-pointer'} onClick={onConnect}>
-                    <img src={'/coinbase.png'} alt={'coinbase'} className={'mx-auto w-[64px]'} />
-                    <p className={'mt-2 text-sm font-medium'}>Coinbase</p>
-                  </div>
+                  <WalletButton.Custom wallet="metamask">
+                    {({ ready, connect }) => {
+                      return (
+                        <div
+                          className={classNames('cursor-pointer', {
+                            'opacity-50': !ready,
+                          })}
+                          onClick={() => {
+                            ready && connect()
+                          }}
+                        >
+                          <img
+                            src={'/metamask.png'}
+                            alt={'rainbow'}
+                            className={'mx-auto w-[64px]'}
+                          />
+                          <p className={'mt-2 text-sm font-medium'}>Metamask</p>
+                        </div>
+                      )
+                    }}
+                  </WalletButton.Custom>
+                  <WalletButton.Custom wallet="rainbow">
+                    {({ ready, connect }) => {
+                      return (
+                        <div
+                          className={classNames('cursor-pointer', {
+                            'opacity-50': !ready,
+                          })}
+                          onClick={() => {
+                            ready && connect()
+                          }}
+                        >
+                          <img
+                            src={'/rainbow.png'}
+                            alt={'rainbow'}
+                            className={'mx-auto w-[64px]'}
+                          />
+                          <p className={'mt-2 text-sm font-medium'}>Rainbow</p>
+                        </div>
+                      )
+                    }}
+                  </WalletButton.Custom>
+                  <WalletButton.Custom wallet="coinbase">
+                    {({ ready, connect }) => {
+                      return (
+                        <div
+                          className={classNames('cursor-pointer', {
+                            'opacity-50': !ready,
+                          })}
+                          onClick={() => {
+                            ready && connect()
+                          }}
+                        >
+                          <img
+                            src={'/coinbase.png'}
+                            alt={'coinbase'}
+                            className={'mx-auto w-[64px]'}
+                          />
+                          <p className={'mt-2 text-sm font-medium'}>Coinbase</p>
+                        </div>
+                      )
+                    }}
+                  </WalletButton.Custom>
                 </div>
                 <Divider />
                 <div className={'text-center'}>
