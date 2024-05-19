@@ -11,6 +11,9 @@
     "plugin:prettier/recommended",
     "plugin:tailwindcss/recommended"
   ],
+  "ignorePatterns": [
+    "generated.ts"
+  ],
   "rules": {
     "tailwindcss/no-custom-classname": "off",
     "@typescript-eslint/no-floating-promises": "off",
