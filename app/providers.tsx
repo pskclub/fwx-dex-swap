@@ -37,6 +37,9 @@ const myTheme = merge(darkTheme(), {
     actionButtonBorder: 'transparent',
     closeButton: 'white',
   },
+  radii: {
+    modal: '20px',
+  },
   fonts: {
     body: font.style.fontFamily,
   },
