@@ -15,12 +15,11 @@ import {
 } from '@nextui-org/react'
 import Image from 'next/image'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
 import React from 'react'
 import { useAccount } from 'wagmi'
 import { disconnect, getAccount } from '@wagmi/core'
 import { CopyIcon } from '@/components/icons/CopyIcon'
-import { MConnectButton } from '@/components/MConnectButton'
+import { MConnectButtonGroup } from '@/components/MConnectButtonGroup'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { config } from '@/app/providers'
 
@@ -91,7 +90,7 @@ export const NavbarMain = () => {
               <ModalHeader className="flex flex-col gap-1">Connect Wallet</ModalHeader>
               <ModalBody className={'py-6'}>
                 <div className={'flex items-center justify-between text-center'}>
-                  <MConnectButton onSuccess={onOpenChange} />
+                  <MConnectButtonGroup onSuccess={onOpenChange} />
                 </div>
                 <Divider />
                 <div className={'text-center'}>
@@ -147,7 +146,6 @@ export const NavbarMain = () => {
                           onClick={onOpen}
                           className={'font-medium'}
                           isLoading={!ready}
-                          as={Link}
                           color="primary"
                           href="#"
                           radius={'full'}
@@ -163,7 +161,6 @@ export const NavbarMain = () => {
                         <Button
                           onClick={openChainModal}
                           endContent={<ChevronDownIcon />}
-                          as={Link}
                           color="secondary"
                           href="#"
                           radius={'full'}
@@ -282,7 +279,6 @@ export const NavbarMain = () => {
                             )
                           }
                           endContent={<ChevronDownIcon className={'size-[24px]'} />}
-                          as={Link}
                           color="secondary"
                           href="#"
                           radius={'full'}
@@ -294,7 +290,6 @@ export const NavbarMain = () => {
                         <Button
                           onClick={disconnectOnOpen}
                           className={'bg-[#373751] font-medium '}
-                          as={Link}
                           color="primary"
                           href="#"
                           radius={'full'}
@@ -309,7 +304,6 @@ export const NavbarMain = () => {
               )
             }}
           </ConnectButton.Custom>
-          {/* )} */}
         </NavbarItem>
       </NavbarContent>
     </Navbar>
