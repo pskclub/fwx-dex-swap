@@ -7,7 +7,7 @@ import { bscTestnet } from 'viem/chains'
 
 const { wallets } = getDefaultWallets()
 
-const config = getDefaultConfig({
+export const config = getDefaultConfig({
   appName: 'FWX Dex',
   wallets: [...wallets],
   projectId: '57b485bae5faecdd345994aa2f00654b',

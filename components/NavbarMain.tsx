@@ -17,20 +17,15 @@ import Image from 'next/image'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import React from 'react'
-import { useAccount, useConnect } from 'wagmi'
+import { useAccount } from 'wagmi'
 import { config } from '@/config'
-import { disconnect, getAccount, injected } from '@wagmi/core'
-import truncateEthAddress from 'truncate-eth-address'
+import { disconnect } from '@wagmi/core'
 import { CopyIcon } from '@/components/icons/CopyIcon'
-import { WalletButton } from '@rainbow-me/rainbowkit'
-import classNames from 'classnames'
+import { MConnectButton } from '@/components/MConnectButton'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 export const NavbarMain = () => {
   const account = useAccount()
-  const { connector } = getAccount(config)
-  const { connect } = useConnect({
-    config,
-  })
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const {
@@ -39,20 +34,13 @@ export const NavbarMain = () => {
     onOpenChange: onOpenChangeDisconnect,
   } = useDisclosure()
 
-  const onConnect = () => {
-    connect(
-      { connector: injected() },
-      {
-        onSuccess: () => {
-          onOpenChange()
-        },
-      }
-    )
-  }
-
   const onDisconnect = async () => {
-    await disconnect(config, { connector })
-    onOpenChangeDisconnect()
+    try {
+      await disconnect(config)
+      onOpenChangeDisconnect()
+    } catch (e) {
+      console.error(1111, e)
+    }
   }
 
   const onCopyAddress = () => {
@@ -107,69 +95,7 @@ export const NavbarMain = () => {
               <ModalHeader className="flex flex-col gap-1">Connect Wallet</ModalHeader>
               <ModalBody className={'py-6'}>
                 <div className={'flex items-center justify-between text-center'}>
-                  <WalletButton.Custom wallet="metamask">
-                    {({ ready, connect }) => {
-                      return (
-                        <div
-                          className={classNames('cursor-pointer', {
-                            'opacity-50': !ready,
-                          })}
-                          onClick={() => {
-                            ready && connect()
-                          }}
-                        >
-                          <img
-                            src={'/metamask.png'}
-                            alt={'rainbow'}
-                            className={'mx-auto w-[64px]'}
-                          />
-                          <p className={'mt-2 text-sm font-medium'}>Metamask</p>
-                        </div>
-                      )
-                    }}
-                  </WalletButton.Custom>
-                  <WalletButton.Custom wallet="rainbow">
-                    {({ ready, connect }) => {
-                      return (
-                        <div
-                          className={classNames('cursor-pointer', {
-                            'opacity-50': !ready,
-                          })}
-                          onClick={() => {
-                            ready && connect()
-                          }}
-                        >
-                          <img
-                            src={'/rainbow.png'}
-                            alt={'rainbow'}
-                            className={'mx-auto w-[64px]'}
-                          />
-                          <p className={'mt-2 text-sm font-medium'}>Rainbow</p>
-                        </div>
-                      )
-                    }}
-                  </WalletButton.Custom>
-                  <WalletButton.Custom wallet="coinbase">
-                    {({ ready, connect }) => {
-                      return (
-                        <div
-                          className={classNames('cursor-pointer', {
-                            'opacity-50': !ready,
-                          })}
-                          onClick={() => {
-                            ready && connect()
-                          }}
-                        >
-                          <img
-                            src={'/coinbase.png'}
-                            alt={'coinbase'}
-                            className={'mx-auto w-[64px]'}
-                          />
-                          <p className={'mt-2 text-sm font-medium'}>Coinbase</p>
-                        </div>
-                      )
-                    }}
-                  </WalletButton.Custom>
+                  <MConnectButton onSuccess={onOpenChange} />
                 </div>
                 <Divider />
                 <div className={'text-center'}>
@@ -185,93 +111,6 @@ export const NavbarMain = () => {
                   </Button>
                   <Button radius={'sm'} fullWidth color={'secondary'} className={'bg-[#373751]'}>
                     Learn more
-                  </Button>
-                </div>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-      <Modal
-        isOpen={isDisconnectOpen}
-        onOpenChange={onOpenChangeDisconnect}
-        classNames={{
-          base: [
-            'flex',
-            'flex-col',
-            'relative',
-            'bg-secondary',
-            'z-50',
-            'w-full',
-            'box-border',
-            'outline-none',
-            'mx-1',
-            'my-1',
-            'sm:mx-6',
-            'sm:my-16',
-          ],
-          closeButton: [
-            'absolute',
-            'appearance-none',
-            'outline-none',
-            'select-none',
-            'top-1',
-            'right-1',
-            'rtl:left-1',
-            'rtl:right-[unset]',
-            'p-2',
-            'text-foreground',
-            'rounded-full',
-            'bg-transparent',
-            'hover:bg-transparent',
-            'active:bg-transparent',
-            '[&>svg]:w-[24px] [&>svg]:h-[24px]',
-          ],
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalBody className={'py-6'}>
-                <div className={'my-4'}>
-                  <p className={'text-center font-medium'}>
-                    {truncateEthAddress(account.address || '')}
-                  </p>
-                  <p className={'text-center text-sm font-medium'}>$12,023.02</p>
-                </div>
-                <div className={'flex space-x-3'}>
-                  <Button
-                    onClick={onCopyAddress}
-                    startContent={<CopyIcon />}
-                    radius={'sm'}
-                    fullWidth
-                    color={'secondary'}
-                    className={'h-auto flex-col border border-divider bg-secondary py-4'}
-                  >
-                    Copy Address
-                  </Button>
-                  <Button
-                    startContent={
-                      <svg
-                        width="25"
-                        height="24"
-                        viewBox="0 0 25 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M11 20.25C11 20.4489 10.921 20.6397 10.7803 20.7803C10.6397 20.921 10.4489 21 10.25 21H5C4.60218 21 4.22064 20.842 3.93934 20.5607C3.65804 20.2794 3.5 19.8978 3.5 19.5V4.5C3.5 4.10218 3.65804 3.72064 3.93934 3.43934C4.22064 3.15804 4.60218 3 5 3H10.25C10.4489 3 10.6397 3.07902 10.7803 3.21967C10.921 3.36032 11 3.55109 11 3.75C11 3.94891 10.921 4.13968 10.7803 4.28033C10.6397 4.42098 10.4489 4.5 10.25 4.5H5V19.5H10.25C10.4489 19.5 10.6397 19.579 10.7803 19.7197C10.921 19.8603 11 20.0511 11 20.25ZM21.2806 11.4694L17.5306 7.71937C17.3899 7.57864 17.199 7.49958 17 7.49958C16.801 7.49958 16.6101 7.57864 16.4694 7.71937C16.3286 7.86011 16.2496 8.05098 16.2496 8.25C16.2496 8.44902 16.3286 8.63989 16.4694 8.78063L18.9397 11.25H10.25C10.0511 11.25 9.86032 11.329 9.71967 11.4697C9.57902 11.6103 9.5 11.8011 9.5 12C9.5 12.1989 9.57902 12.3897 9.71967 12.5303C9.86032 12.671 10.0511 12.75 10.25 12.75H18.9397L16.4694 15.2194C16.3286 15.3601 16.2496 15.551 16.2496 15.75C16.2496 15.949 16.3286 16.1399 16.4694 16.2806C16.6101 16.4214 16.801 16.5004 17 16.5004C17.199 16.5004 17.3899 16.4214 17.5306 16.2806L21.2806 12.5306C21.3504 12.461 21.4057 12.3783 21.4434 12.2872C21.4812 12.1962 21.5006 12.0986 21.5006 12C21.5006 11.9014 21.4812 11.8038 21.4434 11.7128C21.4057 11.6217 21.3504 11.539 21.2806 11.4694Z"
-                          fill="#F4F4F6"
-                        />
-                      </svg>
-                    }
-                    radius={'sm'}
-                    fullWidth
-                    color={'secondary'}
-                    className={'h-auto flex-col border border-divider bg-secondary py-4'}
-                    onClick={onDisconnect}
-                  >
-                    Disconnect
                   </Button>
                 </div>
               </ModalBody>
@@ -322,31 +161,216 @@ export const NavbarMain = () => {
           </Button>
         </NavbarItem>
         <NavbarItem>
-          {account.isConnected ? (
-            <Button
-              onClick={disconnectOnOpen}
-              className={'bg-[#373751] font-medium '}
-              as={Link}
-              color="primary"
-              href="#"
-              radius={'full'}
-              size={'sm'}
-            >
-              {truncateEthAddress(account.address || '')}
-            </Button>
-          ) : (
-            <Button
-              onClick={onOpen}
-              className={'font-medium'}
-              as={Link}
-              color="primary"
-              href="#"
-              radius={'full'}
-              size={'sm'}
-            >
-              Connect Wallet
-            </Button>
-          )}
+          {/* {account.isConnected ? ( */}
+          {/*  <Button */}
+          {/*    onClick={disconnectOnOpen} */}
+          {/*    className={'bg-[#373751] font-medium '} */}
+          {/*    as={Link} */}
+          {/*    color="primary" */}
+          {/*    href="#" */}
+          {/*    radius={'full'} */}
+          {/*    size={'sm'} */}
+          {/*  > */}
+          {/*    {truncateEthAddress(account.address || '')} */}
+          {/*  </Button> */}
+          {/* ) : ( */}
+          <ConnectButton.Custom>
+            {({
+              account,
+              chain,
+              openAccountModal,
+              openChainModal,
+              openConnectModal,
+              authenticationStatus,
+              mounted,
+            }) => {
+              // Note: If your app doesn't use authentication, you
+              // can remove all 'authenticationStatus' checks
+              const ready = mounted && authenticationStatus !== 'loading'
+              const connected =
+                ready &&
+                account &&
+                chain &&
+                (!authenticationStatus || authenticationStatus === 'authenticated')
+
+              return (
+                <div>
+                  {(() => {
+                    if (!connected || !ready) {
+                      return (
+                        <Button
+                          onClick={onOpen}
+                          className={'font-medium'}
+                          isLoading={!ready}
+                          as={Link}
+                          color="primary"
+                          href="#"
+                          radius={'full'}
+                          size={'sm'}
+                        >
+                          Connect Wallet
+                        </Button>
+                      )
+                    }
+
+                    if (chain.unsupported) {
+                      return (
+                        <Button
+                          onClick={openChainModal}
+                          endContent={<ChevronDownIcon />}
+                          as={Link}
+                          color="secondary"
+                          href="#"
+                          radius={'full'}
+                          size={'sm'}
+                          className={'font-medium'}
+                        >
+                          <span className={'hidden md:flex'}>Wrong network</span>
+                        </Button>
+                      )
+                    }
+
+                    return (
+                      <>
+                        <Modal
+                          isOpen={isDisconnectOpen}
+                          onOpenChange={onOpenChangeDisconnect}
+                          classNames={{
+                            base: [
+                              'flex',
+                              'flex-col',
+                              'relative',
+                              'bg-secondary',
+                              'z-50',
+                              'w-full',
+                              'box-border',
+                              'outline-none',
+                              'mx-1',
+                              'my-1',
+                              'sm:mx-6',
+                              'sm:my-16',
+                            ],
+                            closeButton: [
+                              'absolute',
+                              'appearance-none',
+                              'outline-none',
+                              'select-none',
+                              'top-1',
+                              'right-1',
+                              'rtl:left-1',
+                              'rtl:right-[unset]',
+                              'p-2',
+                              'text-foreground',
+                              'rounded-full',
+                              'bg-transparent',
+                              'hover:bg-transparent',
+                              'active:bg-transparent',
+                              '[&>svg]:w-[24px] [&>svg]:h-[24px]',
+                            ],
+                          }}
+                        >
+                          <ModalContent>
+                            {(onClose) => (
+                              <>
+                                <ModalBody className={'py-6'}>
+                                  <div className={'my-4'}>
+                                    <p className={'text-center font-medium'}>
+                                      {account.displayName}
+                                    </p>
+                                    <p className={'text-center text-sm font-medium'}>
+                                      {account.displayBalance ? account.displayBalance : ''}
+                                    </p>
+                                  </div>
+                                  <div className={'flex space-x-3'}>
+                                    <Button
+                                      onClick={onCopyAddress}
+                                      startContent={<CopyIcon />}
+                                      radius={'sm'}
+                                      fullWidth
+                                      color={'secondary'}
+                                      className={
+                                        'h-auto flex-col border border-divider bg-secondary py-4'
+                                      }
+                                    >
+                                      Copy Address
+                                    </Button>
+                                    <Button
+                                      startContent={
+                                        <svg
+                                          width="25"
+                                          height="24"
+                                          viewBox="0 0 25 24"
+                                          fill="none"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M11 20.25C11 20.4489 10.921 20.6397 10.7803 20.7803C10.6397 20.921 10.4489 21 10.25 21H5C4.60218 21 4.22064 20.842 3.93934 20.5607C3.65804 20.2794 3.5 19.8978 3.5 19.5V4.5C3.5 4.10218 3.65804 3.72064 3.93934 3.43934C4.22064 3.15804 4.60218 3 5 3H10.25C10.4489 3 10.6397 3.07902 10.7803 3.21967C10.921 3.36032 11 3.55109 11 3.75C11 3.94891 10.921 4.13968 10.7803 4.28033C10.6397 4.42098 10.4489 4.5 10.25 4.5H5V19.5H10.25C10.4489 19.5 10.6397 19.579 10.7803 19.7197C10.921 19.8603 11 20.0511 11 20.25ZM21.2806 11.4694L17.5306 7.71937C17.3899 7.57864 17.199 7.49958 17 7.49958C16.801 7.49958 16.6101 7.57864 16.4694 7.71937C16.3286 7.86011 16.2496 8.05098 16.2496 8.25C16.2496 8.44902 16.3286 8.63989 16.4694 8.78063L18.9397 11.25H10.25C10.0511 11.25 9.86032 11.329 9.71967 11.4697C9.57902 11.6103 9.5 11.8011 9.5 12C9.5 12.1989 9.57902 12.3897 9.71967 12.5303C9.86032 12.671 10.0511 12.75 10.25 12.75H18.9397L16.4694 15.2194C16.3286 15.3601 16.2496 15.551 16.2496 15.75C16.2496 15.949 16.3286 16.1399 16.4694 16.2806C16.6101 16.4214 16.801 16.5004 17 16.5004C17.199 16.5004 17.3899 16.4214 17.5306 16.2806L21.2806 12.5306C21.3504 12.461 21.4057 12.3783 21.4434 12.2872C21.4812 12.1962 21.5006 12.0986 21.5006 12C21.5006 11.9014 21.4812 11.8038 21.4434 11.7128C21.4057 11.6217 21.3504 11.539 21.2806 11.4694Z"
+                                            fill="#F4F4F6"
+                                          />
+                                        </svg>
+                                      }
+                                      radius={'sm'}
+                                      fullWidth
+                                      color={'secondary'}
+                                      className={
+                                        'h-auto flex-col border border-divider bg-secondary py-4'
+                                      }
+                                      onClick={onDisconnect}
+                                    >
+                                      Disconnect
+                                    </Button>
+                                  </div>
+                                </ModalBody>
+                              </>
+                            )}
+                          </ModalContent>
+                        </Modal>
+                        {/*  <button
+                          onClick={openChainModal}
+                          style={{ display: 'flex', alignItems: 'center' }}
+                          type="button"
+                        >
+                          {chain.hasIcon && (
+                            <div
+                              style={{
+                                background: chain.iconBackground,
+                                width: 12,
+                                height: 12,
+                                borderRadius: 999,
+                                overflow: 'hidden',
+                                marginRight: 4,
+                              }}
+                            >
+                              {chain.iconUrl && (
+                                <img
+                                  alt={chain.name ?? 'Chain icon'}
+                                  src={chain.iconUrl}
+                                  style={{ width: 12, height: 12 }}
+                                />
+                              )}
+                            </div>
+                          )}
+                          {chain.name}
+                        </button> */}
+                        <Button
+                          onClick={disconnectOnOpen}
+                          className={'bg-[#373751] font-medium '}
+                          as={Link}
+                          color="primary"
+                          href="#"
+                          radius={'full'}
+                          size={'sm'}
+                        >
+                          {account.displayName}
+                        </Button>
+                      </>
+                    )
+                  })()}
+                </div>
+              )
+            }}
+          </ConnectButton.Custom>
+          {/* )} */}
         </NavbarItem>
       </NavbarContent>
     </Navbar>
