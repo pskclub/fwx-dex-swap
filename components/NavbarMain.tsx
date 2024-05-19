@@ -160,14 +160,14 @@ export const NavbarMain = () => {
                       return (
                         <Button
                           onClick={openChainModal}
-                          endContent={<ChevronDownIcon />}
-                          color="secondary"
+                          color="danger"
                           href="#"
                           radius={'full'}
                           size={'sm'}
                           className={'font-medium'}
+                          endContent={<ChevronDownIcon className={'size-[16px]'} />}
                         >
-                          Wrong network
+                          Wrong Network
                         </Button>
                       )
                     }
