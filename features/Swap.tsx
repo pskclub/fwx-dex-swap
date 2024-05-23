@@ -186,6 +186,54 @@ export const Swap = () => {
           color={'primary'}
           radius={'sm'}
           size={'lg'}
+          isDisabled={true}
+          fullWidth
+        >
+          Enter Amount
+        </Button>
+        <Button
+          className={'mt-4 text-xl font-semibold'}
+          color={'primary'}
+          radius={'sm'}
+          size={'lg'}
+          isDisabled={true}
+          fullWidth
+        >
+          Not enough B4FWX
+        </Button>
+        <Button
+          className={'mt-4 text-xl font-semibold'}
+          color={'primary'}
+          radius={'sm'}
+          size={'lg'}
+          isDisabled={true}
+          fullWidth
+        >
+          Insufficient liquidity for this Trade
+        </Button>
+        <Button
+          className={'mt-4 text-xl font-semibold'}
+          color={'primary'}
+          radius={'sm'}
+          size={'lg'}
+          fullWidth
+        >
+          Approve B4FWX
+        </Button>
+        <Button
+          className={'mt-4 text-xl font-semibold'}
+          color={'primary'}
+          radius={'sm'}
+          size={'lg'}
+          fullWidth
+        >
+          Approve USDC
+        </Button>
+        <Button
+          className={'mt-4 text-xl font-semibold'}
+          color={'primary'}
+          radius={'sm'}
+          size={'lg'}
           fullWidth
         >
           Swap

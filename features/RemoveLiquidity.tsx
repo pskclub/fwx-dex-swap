@@ -160,6 +160,26 @@ export const RemoveLiquidity = () => {
           >
             Enter Amount
           </Button>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            isDisabled={true}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Approve B4FWX
+          </Button>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            isDisabled={true}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Remove Liquidity
+          </Button>
         </RequireConnected>
       </CardMain>
     </div>

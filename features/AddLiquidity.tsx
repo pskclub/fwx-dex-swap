@@ -134,12 +134,51 @@ export const AddLiquidity = () => {
           <Button
             className={'mt-4 text-xl font-semibold'}
             color={'primary'}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Approve USDC
+          </Button>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
             isDisabled={true}
             radius={'sm'}
             size={'lg'}
             fullWidth
           >
             Enter Amount
+          </Button>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            isDisabled={true}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Not Enough USDC
+          </Button>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            isDisabled={true}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Not Enough B4FWX
+          </Button>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            isDisabled={true}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Add Liquidity
           </Button>
         </RequireConnected>
       </CardMain>
