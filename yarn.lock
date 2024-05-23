@@ -7135,6 +7135,7 @@ __metadata:
     eslint-plugin-tailwindcss: "npm:^3.13.0"
     eslint-plugin-unused-imports: "npm:^3.0.0"
     framer-motion: "npm:^11.2.0"
+    jotai: "npm:^2.8.1"
     lodash.merge: "npm:^4.6.2"
     next: "npm:14.2.3"
     postcss: "npm:^8"
@@ -8084,6 +8085,21 @@ __metadata:
   bin:
     jiti: bin/jiti.js
   checksum: 10c0/7f361219fe6c7a5e440d5f1dba4ab763a5538d2df8708cdc22561cf25ea3e44b837687931fca7cdd8cdd9f567300e90be989dd1321650045012d8f9ed6aab07f
+  languageName: node
+  linkType: hard
+
+"jotai@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "jotai@npm:2.8.1"
+  peerDependencies:
+    "@types/react": ">=17.0.0"
+    react: ">=17.0.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+  checksum: 10c0/a430ad06cf42a23e9cc1104c2eb21cfe043618ab7d943a27442763a4935c4cb96a286dff3a0a4c369e262d2d02d4221de2fb3ec03644ed7ebd1914a217eb7250
   languageName: node
   linkType: hard
 
