@@ -1,9 +1,24 @@
-'use client'
-
 import React from 'react'
 import { Button, Chip, Input } from '@nextui-org/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { CardMain } from '@/components/CardMain'
+import dynamic from 'next/dynamic'
+
+const RequireConnected = dynamic(async () => import('../components/RequireConnected'), {
+  ssr: true,
+  loading: () => (
+    <Button
+      className={'mt-4 text-xl font-semibold'}
+      isLoading={true}
+      color="primary"
+      radius={'sm'}
+      size={'lg'}
+      fullWidth
+    >
+      Connect Wallet
+    </Button>
+  ),
+})
 
 const inputClassNames = {
   label:
@@ -170,24 +185,17 @@ export const Swap = () => {
           </div>
         )}
       </div>
-      <Button
-        className={'mt-4 text-xl font-semibold'}
-        color={'primary'}
-        radius={'sm'}
-        size={'lg'}
-        fullWidth
-      >
-        Connect Wallet
-      </Button>
-      <Button
-        className={'mt-4 text-xl font-semibold'}
-        color={'primary'}
-        radius={'sm'}
-        size={'lg'}
-        fullWidth
-      >
-        Swap
-      </Button>
+      <RequireConnected>
+        <Button
+          className={'mt-4 text-xl font-semibold'}
+          color={'primary'}
+          radius={'sm'}
+          size={'lg'}
+          fullWidth
+        >
+          Swap
+        </Button>
+      </RequireConnected>
     </CardMain>
   )
 }
