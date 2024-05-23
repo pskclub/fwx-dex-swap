@@ -211,7 +211,7 @@ export const Swap = () => {
         </Button>
         <Button
           className={'mt-4 text-xl font-semibold'}
-          color={'primary'}
+          color={'secondary'}
           radius={'sm'}
           size={'lg'}
           isDisabled={true}

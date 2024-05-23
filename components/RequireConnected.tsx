@@ -82,6 +82,8 @@ const RequireConnectedLocal = React.memo(
   areEqual
 )
 
+RequireConnectedLocal.displayName = 'RequireConnected'
+
 export const RequireConnected = dynamic(async () => RequireConnectedLocal, {
   ssr: true,
   loading: () => (
