@@ -6,6 +6,7 @@ import { RequireConnected } from '@/components/RequireConnected'
 import { StatusDetail } from '@/components/StatusDetail'
 import { NumberHelper } from '@/utils/NumberHelper'
 import { useMe } from '@/hooks/useMe'
+import { ActionButton } from '@/components/ActionButton'
 
 const inputClassNames = {
   input: [
@@ -122,64 +123,12 @@ export const AddLiquidity = () => {
           </div>
         </div>
         <RequireConnected>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Approve B4FWX
-          </Button>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Approve USDC
-          </Button>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            isDisabled={true}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Enter Amount
-          </Button>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            isDisabled={true}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Not Enough USDC
-          </Button>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            isDisabled={true}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Not Enough B4FWX
-          </Button>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            isDisabled={true}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Add Liquidity
-          </Button>
+          <ActionButton isDisabled={true}>Enter Amount</ActionButton>
+          <ActionButton isDisabled={true}>Not Enough USDC</ActionButton>
+          <ActionButton isDisabled={true}>Not Enough B4FWX</ActionButton>
+          <ActionButton>Approve B4FWX</ActionButton>
+          <ActionButton>Approve USDC</ActionButton>
+          <ActionButton>Add Liquidity</ActionButton>
         </RequireConnected>
       </CardMain>
     </div>

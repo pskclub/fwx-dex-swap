@@ -1,4 +1,4 @@
-import { Button, Chip, Input } from '@nextui-org/react'
+import { Chip, Input } from '@nextui-org/react'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/16/solid'
 import React from 'react'
 import { CardMain } from '@/components/CardMain'
@@ -6,6 +6,7 @@ import { RequireConnected } from '@/components/RequireConnected'
 import { StatusDetail } from '@/components/StatusDetail'
 import { useMe } from '@/hooks/useMe'
 import { NumberHelper } from '@/utils/NumberHelper'
+import { ActionButton } from '@/components/ActionButton'
 
 const inputClassNames = {
   input: [
@@ -30,6 +31,28 @@ const inputClassNames = {
   ],
 }
 
+const PercentageChip = ({
+  percentage,
+  setPercentage,
+}: {
+  percentage: string
+  setPercentage: (percentage: string) => void
+}) => {
+  return (
+    <Chip
+      onClick={() => {
+        setPercentage(percentage)
+      }}
+      size={'lg'}
+      radius={'full'}
+      color={'secondary'}
+      className={'w-full max-w-full cursor-pointer text-center hover:ring-2 hover:ring-primary'}
+    >
+      {percentage}%
+    </Chip>
+  )
+}
+
 export const RemoveLiquidity = () => {
   const [percentage, setPercentage] = React.useState('0')
   const me = useMe()
@@ -47,58 +70,26 @@ export const RemoveLiquidity = () => {
               </p>
             </div>
             <Input
-              type="text"
+              type="number"
               variant={'bordered'}
               radius={'sm'}
               placeholder="Enter amount"
               classNames={inputClassNames}
+              onValueChange={setPercentage}
+              validate={(value) => {
+                if (Number(value) > 100) {
+                  return 'The percentage must be lower than 100'
+                }
+
+                return ''
+              }}
               value={percentage}
             />
             <div className={'mt-4 flex space-x-2'}>
-              <Chip
-                onClick={() => {
-                  setPercentage('25')
-                }}
-                size={'lg'}
-                radius={'full'}
-                color={'secondary'}
-                className={'w-full max-w-full cursor-pointer text-center'}
-              >
-                25%
-              </Chip>
-              <Chip
-                onClick={() => {
-                  setPercentage('50')
-                }}
-                size={'lg'}
-                radius={'full'}
-                color={'secondary'}
-                className={'w-full max-w-full cursor-pointer text-center'}
-              >
-                50%
-              </Chip>
-              <Chip
-                onClick={() => {
-                  setPercentage('75')
-                }}
-                size={'lg'}
-                radius={'full'}
-                color={'secondary'}
-                className={'w-full max-w-full cursor-pointer text-center'}
-              >
-                75%
-              </Chip>
-              <Chip
-                onClick={() => {
-                  setPercentage('100')
-                }}
-                size={'lg'}
-                radius={'full'}
-                color={'secondary'}
-                className={'w-full max-w-full cursor-pointer text-center'}
-              >
-                100%
-              </Chip>
+              <PercentageChip percentage={'25'} setPercentage={setPercentage} />
+              <PercentageChip percentage={'50'} setPercentage={setPercentage} />
+              <PercentageChip percentage={'75'} setPercentage={setPercentage} />
+              <PercentageChip percentage={'100'} setPercentage={setPercentage} />
             </div>
           </div>
         </div>
@@ -150,36 +141,9 @@ export const RemoveLiquidity = () => {
           </div>
         </div>
         <RequireConnected>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            isDisabled={true}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Enter Amount
-          </Button>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            isDisabled={true}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Approve B4FWX
-          </Button>
-          <Button
-            className={'mt-4 text-xl font-semibold'}
-            color={'primary'}
-            isDisabled={true}
-            radius={'sm'}
-            size={'lg'}
-            fullWidth
-          >
-            Remove Liquidity
-          </Button>
+          <ActionButton isDisabled={true}>Enter Amount</ActionButton>
+          <ActionButton>Approve B4FWX</ActionButton>
+          <ActionButton>Remove Liquidity</ActionButton>
         </RequireConnected>
       </CardMain>
     </div>

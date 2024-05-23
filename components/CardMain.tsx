@@ -13,7 +13,7 @@ export const CardMain = ({ children }: { children: ReactNode }) => {
         <Faire />
       </div>
       <Card className={'mt-4 rounded-[20px] border-1.5 border-[#242438] bg-background'}>
-        <CardBody className={'p-[20px]'}>{children}</CardBody>
+        <CardBody className={'px-[12px] py-[20px] md:p-[20px]'}>{children}</CardBody>
       </Card>
     </div>
   )
