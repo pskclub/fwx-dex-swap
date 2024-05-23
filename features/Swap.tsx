@@ -23,8 +23,35 @@ const inputClassNames = {
   innerWrapper: 'bg-transparent',
   inputWrapper: [
     'px-0',
+    'h-[24px]',
     'shadow-none',
     'bg-transparent',
+    'data-[hover=true]:bg-transparent',
+    'hover:bg-transparent',
+    'group-data-[focus=true]:bg-transparent',
+    '!cursor-text',
+  ],
+}
+
+const inputSmallClassNames = {
+  label: 'hidden',
+  input: [
+    'bg-transparent data-[hover=true]:bg-transparent',
+    'group-data-[has-value=true]:text-gray-50',
+    'text-white',
+    'font-normal',
+    'text-xs',
+    'py-0',
+    'placeholder:text-gray-400',
+  ],
+  innerWrapper: 'bg-transparent',
+  inputWrapper: [
+    'h-[24px] min-h-[24px]',
+    'px-1',
+    'py-1',
+    'shadow-none',
+    'bg-transparent',
+    'group-data-[focus=true]:ring-2 group-data-[focus=true]:ring-primary',
     'data-[hover=true]:bg-transparent',
     'hover:bg-transparent',
     'group-data-[focus=true]:bg-transparent',
@@ -206,7 +233,7 @@ export const Swap = () => {
                   onClick={() => {
                     setIsExpandSlippage(true)
                   }}
-                  className={'ml-2'}
+                  className={'ml-2 cursor-pointer'}
                   size={'sm'}
                   radius={'sm'}
                   color={'secondary'}
@@ -229,6 +256,13 @@ export const Swap = () => {
                   <Chip className={'cursor-pointer'} size={'sm'} radius={'sm'} color={'secondary'}>
                     5%
                   </Chip>
+                  <Input
+                    type="number"
+                    placeholder="0"
+                    size={'sm'}
+                    classNames={inputSmallClassNames}
+                    endContent={'%'}
+                  />
                 </div>
               )}
             </div>
