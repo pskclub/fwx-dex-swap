@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button, Chip, Input } from '@nextui-org/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { CardMain } from '@/components/CardMain'
 import { useWatchAccount } from '@/hooks/useWatchAccount'
-import { useReadContract, useReadContracts } from 'wagmi'
-import { erc20Abi } from 'abitype/abis'
-import { formatUnits } from 'viem'
 import { RequireConnected } from '@/components/RequireConnected'
+import { useMe } from '@/hooks/useMe'
+import { NumberUtil } from '@/utils/NumberUtil'
 
 const inputClassNames = {
   label:
@@ -31,108 +30,10 @@ const inputClassNames = {
   ],
 }
 
-const B4FWX_ADDRESS = '0xdf0E5cE5dcEE5f257e073C74FABe1f77775dcCDE'
-const USDC_ADDRESS = '0x26a0417Aa86ED40750CBa69F9a2126473346224c'
-
 export const Swap = () => {
   const [expand, setExpand] = React.useState(false)
   const account = useWatchAccount()
-
-  const ETHQery = useReadContracts({
-    contracts: [
-      {
-        abi: erc20Abi,
-        functionName: 'symbol',
-        address: B4FWX_ADDRESS,
-      },
-      {
-        abi: erc20Abi,
-        functionName: 'decimals',
-        address: B4FWX_ADDRESS,
-      },
-    ],
-    allowFailure: false,
-
-    query: {
-      staleTime: Infinity,
-    },
-  })
-
-  const WBNBQuery = useReadContracts({
-    contracts: [
-      {
-        abi: erc20Abi,
-        functionName: 'symbol',
-        address: USDC_ADDRESS,
-      },
-      {
-        abi: erc20Abi,
-        functionName: 'decimals',
-        address: USDC_ADDRESS,
-      },
-    ],
-    allowFailure: false,
-
-    query: {
-      staleTime: Infinity,
-    },
-  })
-
-  const EthBalance = useReadContract(
-    account.address
-      ? {
-          abi: erc20Abi,
-          functionName: 'balanceOf',
-          address: B4FWX_ADDRESS,
-          args: [account.address],
-        }
-      : undefined
-  )
-
-  const WBNBBalance = useReadContract(
-    account.address
-      ? {
-          abi: erc20Abi,
-          functionName: 'balanceOf',
-          address: USDC_ADDRESS,
-          args: [account.address],
-        }
-      : undefined
-  )
-
-  const result = useReadContracts(
-    account.address
-      ? {
-          allowFailure: false,
-          contracts: [
-            {
-              address: B4FWX_ADDRESS,
-              abi: erc20Abi,
-              functionName: 'decimals',
-            },
-            {
-              address: B4FWX_ADDRESS,
-              abi: erc20Abi,
-              functionName: 'name',
-            },
-            {
-              address: B4FWX_ADDRESS,
-              abi: erc20Abi,
-              functionName: 'symbol',
-            },
-            {
-              address: B4FWX_ADDRESS,
-              abi: erc20Abi,
-              functionName: 'totalSupply',
-            },
-          ],
-        }
-      : undefined
-  )
-
-  useEffect(() => {
-    console.log(result)
-  }, [result])
+  const me = useMe()
 
   return (
     <CardMain>
@@ -142,10 +43,7 @@ export const Swap = () => {
           {account.isConnected && (
             <p className={'text-xs text-white'}>
               <span className={'text-gray-400'}>Balance:</span>{' '}
-              {formatUnits(
-                EthBalance.isSuccess ? EthBalance.data : 0n,
-                ETHQery.isSuccess ? ETHQery.data[1] : 18
-              )}
+              {NumberUtil.display(me.b4fwxBalance, me.b4fwxDecimals)}
             </p>
           )}
         </div>
@@ -189,10 +87,7 @@ export const Swap = () => {
           {account.isConnected && (
             <p className={'text-xs text-white'}>
               <span className={'text-gray-400'}>Balance:</span>{' '}
-              {formatUnits(
-                WBNBBalance.isSuccess ? WBNBBalance.data : 0n,
-                WBNBQuery.isSuccess ? WBNBQuery.data[1] : 18
-              )}
+              {NumberUtil.display(me.usdcBalance, me.usdcDecimals)}
             </p>
           )}
         </div>
