@@ -2,11 +2,9 @@
 
 import {
   Button,
-  Divider,
   Modal,
   ModalBody,
   ModalContent,
-  ModalHeader,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -16,15 +14,13 @@ import {
 import Image from 'next/image'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import React from 'react'
-import { useAccount } from 'wagmi'
 import { disconnect, getAccount } from '@wagmi/core'
 import { CopyIcon } from '@/components/icons/CopyIcon'
-import { MConnectButtonGroup } from '@/components/MConnectButtonGroup'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { config } from '@/app/providers'
+import { ConnectWalletModal } from '@/components/ConnectWalletModal'
 
 export const NavbarMain = () => {
-  const account = useAccount()
   const { connector } = getAccount(config)
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const {
@@ -38,8 +34,8 @@ export const NavbarMain = () => {
     onOpenChangeDisconnect()
   }
 
-  const onCopyAddress = () => {
-    navigator.clipboard.writeText(account.address || '')
+  const onCopyAddress = (address: string) => {
+    navigator.clipboard.writeText(address)
   }
 
   return (
@@ -47,72 +43,7 @@ export const NavbarMain = () => {
       maxWidth={'2xl'}
       className={'mb-4 border-b border-[#242438] bg-background text-white md:border-0'}
     >
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        classNames={{
-          base: [
-            'flex',
-            'flex-col',
-            'relative',
-            'bg-secondary',
-            'z-50',
-            'w-full',
-            'box-border',
-            'outline-none',
-            'mx-1',
-            'my-1',
-            'sm:mx-6',
-            'sm:my-16',
-          ],
-          closeButton: [
-            'absolute',
-            'appearance-none',
-            'outline-none',
-            'select-none',
-            'top-1',
-            'right-1',
-            'rtl:left-1',
-            'rtl:right-[unset]',
-            'p-2',
-            'text-foreground',
-            'rounded-full',
-            'bg-transparent',
-            'hover:bg-transparent',
-            'active:bg-transparent',
-            '[&>svg]:w-[24px] [&>svg]:h-[24px]',
-          ],
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">Connect Wallet</ModalHeader>
-              <ModalBody className={'py-6'}>
-                <div className={'flex items-center justify-between text-center'}>
-                  <MConnectButtonGroup onSuccess={onOpenChange} />
-                </div>
-                <Divider />
-                <div className={'text-center'}>
-                  <p className={'font-bold'}>What is wallet</p>
-                  <p className={'mt-3 text-sm text-gray-400'}>
-                    What is wallet What is walletWhat is wallet What is walletWhat is wallet What is
-                    wallet
-                  </p>
-                </div>
-                <div className={'flex space-x-3'}>
-                  <Button radius={'sm'} fullWidth color={'secondary'} className={'bg-[#373751]'}>
-                    Get wallet
-                  </Button>
-                  <Button radius={'sm'} fullWidth color={'secondary'} className={'bg-[#373751]'}>
-                    Learn more
-                  </Button>
-                </div>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      <ConnectWalletModal isOpen={isOpen} onOpenChange={onOpenChange} />
       <NavbarBrand>
         <Image src={'/logo.png'} className={'h-[15px]'} alt={'logo'} width={50.08} height={14.59} />
       </NavbarBrand>
@@ -147,7 +78,6 @@ export const NavbarMain = () => {
                           className={'font-medium'}
                           isLoading={!ready}
                           color="primary"
-                          href="#"
                           radius={'full'}
                           size={'sm'}
                         >
@@ -161,13 +91,12 @@ export const NavbarMain = () => {
                         <Button
                           onClick={openChainModal}
                           color="danger"
-                          href="#"
                           radius={'full'}
                           size={'sm'}
                           className={'font-medium'}
                           endContent={<ChevronDownIcon className={'size-[16px]'} />}
                         >
-                          Wrong Network
+                          Wrong network
                         </Button>
                       )
                     }
@@ -225,7 +154,9 @@ export const NavbarMain = () => {
                                   </div>
                                   <div className={'flex space-x-3'}>
                                     <Button
-                                      onClick={onCopyAddress}
+                                      onClick={() => {
+                                        onCopyAddress(account.address)
+                                      }}
                                       startContent={<CopyIcon />}
                                       radius={'sm'}
                                       fullWidth
@@ -280,7 +211,6 @@ export const NavbarMain = () => {
                           }
                           endContent={<ChevronDownIcon className={'size-[16px]'} />}
                           color="secondary"
-                          href="#"
                           radius={'full'}
                           size={'sm'}
                           className={'mr-2 px-2 font-medium'}

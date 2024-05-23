@@ -1,7 +1,7 @@
 'use client'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { cookieStorage, createStorage, WagmiProvider } from 'wagmi'
+import { WagmiProvider } from 'wagmi'
 import {
   darkTheme,
   getDefaultConfig,
@@ -21,9 +21,6 @@ export const config = getDefaultConfig({
   projectId: '57b485bae5faecdd345994aa2f00654b',
   chains: [avalancheFuji, avalanche],
   ssr: true,
-  storage: createStorage({
-    storage: cookieStorage,
-  }),
 })
 
 const queryClient = new QueryClient()
