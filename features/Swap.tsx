@@ -3,6 +3,7 @@ import { Button, Chip, Input } from '@nextui-org/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { CardMain } from '@/components/CardMain'
 import dynamic from 'next/dynamic'
+import { useWatchAccount } from '@/hooks/useWatchAccount'
 
 const RequireConnected = dynamic(async () => import('../components/RequireConnected'), {
   ssr: true,
@@ -45,15 +46,18 @@ const inputClassNames = {
 
 export const Swap = () => {
   const [expand, setExpand] = React.useState(false)
+  const account = useWatchAccount()
 
   return (
     <CardMain>
       <div>
         <div className={'flex items-center justify-between'}>
           <p className={'text-sm text-gray-200'}>You pay</p>
-          <p className={'text-xs text-white'}>
-            <span className={'text-gray-400'}>Balance:</span> 200
-          </p>
+          {account.isConnected && (
+            <p className={'text-xs text-white'}>
+              <span className={'text-gray-400'}>Balance:</span> 200
+            </p>
+          )}
         </div>
         <Input
           type="text"
@@ -92,9 +96,11 @@ export const Swap = () => {
         </div>
         <div className={'flex items-center justify-between'}>
           <p className={'text-sm text-gray-200'}>You Receive</p>
-          <p className={'text-xs text-white'}>
-            <span className={'text-gray-400'}>Balance:</span> 200
-          </p>
+          {account.isConnected && (
+            <p className={'text-xs text-white'}>
+              <span className={'text-gray-400'}>Balance:</span> 200
+            </p>
+          )}
         </div>
         <Input
           type="text"
