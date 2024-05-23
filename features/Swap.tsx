@@ -42,7 +42,9 @@ const inputSmallClassNames = {
     'font-normal',
     'text-xs',
     'py-0',
+    'pr-0',
     'placeholder:text-gray-400',
+    'data-[has-start-content=true]:ps-0 data-[has-end-content=true]:pe-0',
   ],
   innerWrapper: 'bg-transparent',
   inputWrapper: [
@@ -51,7 +53,7 @@ const inputSmallClassNames = {
     'py-1',
     'shadow-none',
     'bg-transparent',
-    'group-data-[focus=true]:ring-2 group-data-[focus=true]:ring-primary',
+    'ring-2 ring-divider group-data-[focus=true]:ring-primary',
     'data-[hover=true]:bg-transparent',
     'hover:bg-transparent',
     'group-data-[focus=true]:bg-transparent',
