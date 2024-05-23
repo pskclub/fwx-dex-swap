@@ -1,10 +1,11 @@
-import { Button, Chip, Input } from '@nextui-org/react'
+import { Button, Input } from '@nextui-org/react'
 import React from 'react'
 import { PlusIcon } from '@heroicons/react/16/solid'
 import { CardMain } from '@/components/CardMain'
-import { CopyIcon } from '@/components/icons/CopyIcon'
-import { OutIcon } from '@/components/icons/OutIcon'
 import { RequireConnected } from '@/components/RequireConnected'
+import { StatusDetail } from '@/components/StatusDetail'
+import { NumberHelper } from '@/utils/NumberHelper'
+import { useMe } from '@/hooks/useMe'
 
 const inputClassNames = {
   input: [
@@ -30,39 +31,17 @@ const inputClassNames = {
 }
 
 export const AddLiquidity = () => {
+  const me = useMe()
+
   return (
     <div className={'mt-4'}>
-      <div className={'flex gap-3'}>
-        <Chip size={'md'} radius={'md'} color={'secondary'} className={'w-full max-w-full'}>
-          <span className={'text-sm text-gray-400'}>Liquidity</span>{' '}
-          <span className={'font-semibold'}>$1,678,432</span>
-        </Chip>
-        <Chip size={'md'} radius={'md'} color={'secondary'} className={'w-full max-w-full'}>
-          <span className={'text-sm text-gray-400'}>APR (24h)</span>{' '}
-          <span className={'font-semibold'}>189.96%</span>
-        </Chip>
-      </div>
-      <div className={'mt-4 flex space-x-3 text-gray-50'}>
-        <Chip
-          size={'sm'}
-          radius={'full'}
-          color={'secondary'}
-          classNames={{
-            content: 'flex flex-row text-xs items-center',
-          }}
-        >
-          0xAaf8...c086C
-          <CopyIcon className={'ml-1 size-[14px] cursor-pointer text-gray-50'} />
-          <OutIcon className={'ml-1 size-[14px] cursor-pointer text-gray-50'} />
-        </Chip>
-        <Chip size={'sm'} radius={'full'} color={'secondary'} className={'text-xs'}>
-          1 B4FWX = 0.00000007970 USDC
-        </Chip>
-      </div>
+      <StatusDetail />
       <CardMain>
         <div className={'space-y-4'}>
           <div>
-            <p className={'mb-2 text-end text-xs text-[#6C6C8C]'}>Balance: 119,9928,989.12</p>
+            <p className={'mb-2 text-end text-xs text-[#6C6C8C]'}>
+              Balance: {NumberHelper.display(me.b4fwxBalance, me.b4fwxDecimals)}
+            </p>
             <Input
               type="text"
               variant={'bordered'}
@@ -86,7 +65,9 @@ export const AddLiquidity = () => {
             />
           </div>
           <div>
-            <p className={'mb-2 text-end text-xs text-[#6C6C8C]'}>Balance: 119,9928,989.12</p>
+            <p className={'mb-2 text-end text-xs text-[#6C6C8C]'}>
+              Balance: {NumberHelper.display(me.usdcBalance, me.usdcDecimals)}
+            </p>
             <Input
               type="text"
               radius={'sm'}
@@ -121,7 +102,7 @@ export const AddLiquidity = () => {
                 <p className={'text-sm font-medium'}>
                   100,000 <span className={'text-gray-400'}>B4FWX</span>
                 </p>
-                <p className={'mt-1 text-xs text-gray-400'}>100,000 B4FWX</p>
+                <p className={'mt-1 text-xs text-gray-400'}>$100</p>
               </div>
             </div>
             <PlusIcon className={'hidden size-[24px] md:flex'} />
@@ -135,7 +116,7 @@ export const AddLiquidity = () => {
                 <p className={'text-sm font-medium'}>
                   100,000 <span className={'text-gray-400'}>USDC</span>
                 </p>
-                <p className={'mt-1 text-xs text-gray-400'}>100,000 B4FWX</p>
+                <p className={'mt-1 text-xs text-gray-400'}>$100</p>
               </div>
             </div>
           </div>

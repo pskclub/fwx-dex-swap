@@ -5,7 +5,7 @@ import { CardMain } from '@/components/CardMain'
 import { useWatchAccount } from '@/hooks/useWatchAccount'
 import { RequireConnected } from '@/components/RequireConnected'
 import { useMe } from '@/hooks/useMe'
-import { NumberUtil } from '@/utils/NumberUtil'
+import { NumberHelper } from '@/utils/NumberHelper'
 
 const inputClassNames = {
   label:
@@ -43,7 +43,7 @@ export const Swap = () => {
           {account.isConnected && (
             <p className={'text-xs text-white'}>
               <span className={'text-gray-400'}>Balance:</span>{' '}
-              {NumberUtil.display(me.b4fwxBalance, me.b4fwxDecimals)}
+              {NumberHelper.display(me.b4fwxBalance, me.b4fwxDecimals)}
             </p>
           )}
         </div>
@@ -87,7 +87,7 @@ export const Swap = () => {
           {account.isConnected && (
             <p className={'text-xs text-white'}>
               <span className={'text-gray-400'}>Balance:</span>{' '}
-              {NumberUtil.display(me.usdcBalance, me.usdcDecimals)}
+              {NumberHelper.display(me.usdcBalance, me.usdcDecimals)}
             </p>
           )}
         </div>

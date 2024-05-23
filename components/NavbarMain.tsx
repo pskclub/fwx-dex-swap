@@ -19,6 +19,7 @@ import { CopyIcon } from '@/components/icons/CopyIcon'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { config } from '@/app/providers'
 import { ConnectWalletModal } from '@/components/ConnectWalletModal'
+import { StringHelper } from '@/utils/StringHelper'
 
 export const NavbarMain = () => {
   const { connector } = getAccount(config)
@@ -35,7 +36,7 @@ export const NavbarMain = () => {
   }
 
   const onCopyAddress = (address: string) => {
-    navigator.clipboard.writeText(address)
+    StringHelper.copy(address)
   }
 
   return (

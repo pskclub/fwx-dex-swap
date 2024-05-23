@@ -1,10 +1,10 @@
 import { formatUnits } from 'viem'
 
-export class NumberUtil {
+export class NumberHelper {
   static display(value: bigint, decimals: number): string {
     const formattedValue: string = formatUnits(value, decimals)
 
-    return NumberUtil.addCommasToNumber(formattedValue)
+    return NumberHelper.addCommasToNumber(formattedValue)
   }
 
   private static addCommasToNumber(value: string): string {
