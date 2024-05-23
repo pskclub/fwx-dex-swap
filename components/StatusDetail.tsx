@@ -11,6 +11,7 @@ import { NumberHelper } from '@/utils/NumberHelper'
 export const StatusDetail = () => {
   const account = useWatchAccount()
   const me = useMe()
+  const [toggle, setToggle] = React.useState(false)
 
   return (
     <>
@@ -73,8 +74,26 @@ export const StatusDetail = () => {
             <OutIcon className={'ml-1 size-[14px] cursor-pointer text-gray-50'} />
           </a>
         </Chip>
-        <Chip size={'sm'} radius={'full'} color={'secondary'} className={'text-xs'}>
-          1 B4FWX = 0.00000007970 USDC
+        <Chip
+          size={'sm'}
+          radius={'full'}
+          color={'secondary'}
+          className={'cursor-pointer text-xs'}
+          onClick={() => {
+            setToggle(!toggle)
+          }}
+        >
+          {!toggle ? (
+            <p>
+              {NumberHelper.display(me.b4fwxUSDCIn, me.b4fwxDecimals)} B4FWX ={' '}
+              {NumberHelper.display(me.b4fwxUSDCOut, me.usdcDecimals)} USDC
+            </p>
+          ) : (
+            <p>
+              {NumberHelper.display(me.usdcB4fwxIn, me.usdcDecimals)} USDC ={' '}
+              {NumberHelper.display(me.usdcB4fwxOut, me.b4fwxDecimals)} B4FWX
+            </p>
+          )}
         </Chip>
       </div>
     </>

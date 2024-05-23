@@ -32,6 +32,7 @@ const inputClassNames = {
 
 export const Swap = () => {
   const [expand, setExpand] = React.useState(false)
+  const [toggle, setToggle] = React.useState(false)
   const account = useWatchAccount()
   const me = useMe()
 
@@ -110,14 +111,7 @@ export const Swap = () => {
         />
       </div>
       <div className={'mt-4 rounded-[12px] border border-divider'}>
-        <div
-          onClick={() => {
-            setExpand(!expand)
-          }}
-          className={
-            'flex cursor-pointer select-none items-center justify-between p-3 text-xs text-gray-300'
-          }
-        >
+        <div className={'flex items-center justify-between p-3 text-xs text-gray-300'}>
           <div className={'flex items-center'}>
             {!expand ? (
               <>
@@ -127,7 +121,24 @@ export const Swap = () => {
                 </Chip>
               </>
             ) : (
-              <p className={'text-xs text-gray-50'}>1 B4FWX = 0.00000007970 USDC</p>
+              <p
+                className={'cursor-pointer text-xs text-gray-50'}
+                onClick={() => {
+                  setToggle(!toggle)
+                }}
+              >
+                {!toggle ? (
+                  <span>
+                    {NumberHelper.display(me.b4fwxUSDCIn, me.b4fwxDecimals)} B4FWX ={' '}
+                    {NumberHelper.display(me.b4fwxUSDCOut, me.usdcDecimals)} USDC
+                  </span>
+                ) : (
+                  <span>
+                    {NumberHelper.display(me.usdcB4fwxIn, me.usdcDecimals)} USDC ={' '}
+                    {NumberHelper.display(me.usdcB4fwxOut, me.b4fwxDecimals)} B4FWX
+                  </span>
+                )}
+              </p>
             )}
           </div>
           <div className={'flex items-center'}>
@@ -146,11 +157,18 @@ export const Swap = () => {
             </svg>
 
             <p>$0.03</p>
-            {expand ? (
-              <ChevronUpIcon className={'ml-2 size-[20px]'} />
-            ) : (
-              <ChevronDownIcon className={'ml-2 size-[20px]'} />
-            )}
+            <div
+              className={'cursor-pointer'}
+              onClick={() => {
+                setExpand(!expand)
+              }}
+            >
+              {expand ? (
+                <ChevronUpIcon className={'ml-2 size-[20px]'} />
+              ) : (
+                <ChevronDownIcon className={'ml-2 size-[20px]'} />
+              )}
+            </div>
           </div>
         </div>
         {expand && (
