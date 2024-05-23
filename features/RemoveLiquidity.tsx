@@ -30,6 +30,8 @@ const inputClassNames = {
 }
 
 export const RemoveLiquidity = () => {
+  const [percentage, setPercentage] = React.useState('0')
+
   return (
     <div className={'mt-4'}>
       <div className={'flex gap-3'}>
@@ -72,37 +74,50 @@ export const RemoveLiquidity = () => {
               radius={'sm'}
               placeholder="Enter amount"
               classNames={inputClassNames}
+              value={percentage}
             />
             <div className={'mt-4 flex space-x-2'}>
               <Chip
+                onClick={() => {
+                  setPercentage('25')
+                }}
                 size={'lg'}
                 radius={'full'}
                 color={'secondary'}
-                className={'w-full max-w-full text-center'}
+                className={'w-full max-w-full cursor-pointer text-center'}
               >
                 25%
               </Chip>
               <Chip
+                onClick={() => {
+                  setPercentage('50')
+                }}
                 size={'lg'}
                 radius={'full'}
                 color={'secondary'}
-                className={'w-full max-w-full text-center'}
+                className={'w-full max-w-full cursor-pointer text-center'}
               >
                 50%
               </Chip>
               <Chip
+                onClick={() => {
+                  setPercentage('75')
+                }}
                 size={'lg'}
                 radius={'full'}
                 color={'secondary'}
-                className={'w-full max-w-full text-center'}
+                className={'w-full max-w-full cursor-pointer text-center'}
               >
                 75%
               </Chip>
               <Chip
+                onClick={() => {
+                  setPercentage('100')
+                }}
                 size={'lg'}
                 radius={'full'}
                 color={'secondary'}
-                className={'w-full max-w-full text-center'}
+                className={'w-full max-w-full cursor-pointer text-center'}
               >
                 100%
               </Chip>

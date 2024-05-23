@@ -76,7 +76,6 @@ const RequireConnectedLocal = ({
 }
 
 export const RequireConnected = dynamic(async () => RequireConnectedLocal, {
-  ssr: true,
   loading: () => (
     <Button
       className={'mt-4 text-xl font-semibold'}

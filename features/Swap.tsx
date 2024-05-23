@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Chip, Input } from '@nextui-org/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { CardMain } from '@/components/CardMain'
@@ -31,8 +31,8 @@ const inputClassNames = {
   ],
 }
 
-const ETH_ADDRESS = '0xd66c6B4F0be8CE5b39D52E0Fd1344c389929B378'
-const WBNB_ADDRESS = '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd'
+const B4FWX_ADDRESS = '0xdf0E5cE5dcEE5f257e073C74FABe1f77775dcCDE'
+const USDC_ADDRESS = '0x26a0417Aa86ED40750CBa69F9a2126473346224c'
 
 export const Swap = () => {
   const [expand, setExpand] = React.useState(false)
@@ -43,12 +43,12 @@ export const Swap = () => {
       {
         abi: erc20Abi,
         functionName: 'symbol',
-        address: ETH_ADDRESS,
+        address: B4FWX_ADDRESS,
       },
       {
         abi: erc20Abi,
         functionName: 'decimals',
-        address: ETH_ADDRESS,
+        address: B4FWX_ADDRESS,
       },
     ],
     allowFailure: false,
@@ -63,12 +63,12 @@ export const Swap = () => {
       {
         abi: erc20Abi,
         functionName: 'symbol',
-        address: ETH_ADDRESS,
+        address: USDC_ADDRESS,
       },
       {
         abi: erc20Abi,
         functionName: 'decimals',
-        address: ETH_ADDRESS,
+        address: USDC_ADDRESS,
       },
     ],
     allowFailure: false,
@@ -83,7 +83,7 @@ export const Swap = () => {
       ? {
           abi: erc20Abi,
           functionName: 'balanceOf',
-          address: ETH_ADDRESS,
+          address: B4FWX_ADDRESS,
           args: [account.address],
         }
       : undefined
@@ -94,11 +94,45 @@ export const Swap = () => {
       ? {
           abi: erc20Abi,
           functionName: 'balanceOf',
-          address: WBNB_ADDRESS,
+          address: USDC_ADDRESS,
           args: [account.address],
         }
       : undefined
   )
+
+  const result = useReadContracts(
+    account.address
+      ? {
+          allowFailure: false,
+          contracts: [
+            {
+              address: B4FWX_ADDRESS,
+              abi: erc20Abi,
+              functionName: 'decimals',
+            },
+            {
+              address: B4FWX_ADDRESS,
+              abi: erc20Abi,
+              functionName: 'name',
+            },
+            {
+              address: B4FWX_ADDRESS,
+              abi: erc20Abi,
+              functionName: 'symbol',
+            },
+            {
+              address: B4FWX_ADDRESS,
+              abi: erc20Abi,
+              functionName: 'totalSupply',
+            },
+          ],
+        }
+      : undefined
+  )
+
+  useEffect(() => {
+    console.log(result)
+  }, [result])
 
   return (
     <CardMain>
