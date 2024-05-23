@@ -4,6 +4,7 @@ import '@rainbow-me/rainbowkit/styles.css'
 import { NextUIProvider } from '@nextui-org/react'
 import { Providers } from '@/app/providers'
 import { font } from '@/app/font'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
   title: 'FWX - Real Yield and Decentralized Derivatives Platform',
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <NextUIProvider>
+          <Toaster position={'top-center'} />
           <Providers>{children}</Providers>
         </NextUIProvider>
       </body>
