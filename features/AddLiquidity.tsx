@@ -4,6 +4,7 @@ import { PlusIcon } from '@heroicons/react/16/solid'
 import { CardMain } from '@/components/CardMain'
 import { CopyIcon } from '@/components/icons/CopyIcon'
 import { OutIcon } from '@/components/icons/OutIcon'
+import { RequireConnected } from '@/components/RequireConnected'
 
 const inputClassNames = {
   input: [
@@ -139,25 +140,27 @@ export const AddLiquidity = () => {
             </div>
           </div>
         </div>
-        <Button
-          className={'mt-4 text-xl font-semibold'}
-          color={'primary'}
-          radius={'sm'}
-          size={'lg'}
-          fullWidth
-        >
-          Approve B4FWX
-        </Button>
-        <Button
-          className={'mt-4 text-xl font-semibold'}
-          color={'primary'}
-          isDisabled={true}
-          radius={'sm'}
-          size={'lg'}
-          fullWidth
-        >
-          Enter Amount
-        </Button>
+        <RequireConnected>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Approve B4FWX
+          </Button>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            isDisabled={true}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Enter Amount
+          </Button>
+        </RequireConnected>
       </CardMain>
     </div>
   )

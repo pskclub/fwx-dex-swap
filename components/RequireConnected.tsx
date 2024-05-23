@@ -2,8 +2,9 @@ import { Button, useDisclosure } from '@nextui-org/react'
 import React from 'react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { ConnectWalletModal } from '@/components/ConnectWalletModal'
+import dynamic from 'next/dynamic'
 
-export const RequireConnected = ({
+const RequireConnectedLocal = ({
   children,
 }: Readonly<{
   children?: React.ReactNode
@@ -74,4 +75,18 @@ export const RequireConnected = ({
   )
 }
 
-export default RequireConnected
+export const RequireConnected = dynamic(async () => RequireConnectedLocal, {
+  ssr: true,
+  loading: () => (
+    <Button
+      className={'mt-4 text-xl font-semibold'}
+      isLoading={true}
+      color="primary"
+      radius={'sm'}
+      size={'lg'}
+      fullWidth
+    >
+      Connect Wallet
+    </Button>
+  ),
+})

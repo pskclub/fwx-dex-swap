@@ -4,6 +4,7 @@ import React from 'react'
 import { CardMain } from '@/components/CardMain'
 import { CopyIcon } from '@/components/icons/CopyIcon'
 import { OutIcon } from '@/components/icons/OutIcon'
+import { RequireConnected } from '@/components/RequireConnected'
 
 const inputClassNames = {
   input: [
@@ -155,16 +156,18 @@ export const RemoveLiquidity = () => {
             </div>
           </div>
         </div>
-        <Button
-          className={'mt-4 text-xl font-semibold'}
-          color={'primary'}
-          isDisabled={true}
-          radius={'sm'}
-          size={'lg'}
-          fullWidth
-        >
-          Enter Amount
-        </Button>
+        <RequireConnected>
+          <Button
+            className={'mt-4 text-xl font-semibold'}
+            color={'primary'}
+            isDisabled={true}
+            radius={'sm'}
+            size={'lg'}
+            fullWidth
+          >
+            Enter Amount
+          </Button>
+        </RequireConnected>
       </CardMain>
     </div>
   )

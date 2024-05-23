@@ -66,9 +66,28 @@ export const TabsMain = () => {
         </Button>
       </div>
 
-      {activeTab === 'swap' && <Swap />}
-      {activeTab === 'add' && <AddLiquidity />}
-      {activeTab === 'remove' && <RemoveLiquidity />}
+      <div
+        className={classNames({
+          hidden: activeTab !== 'swap',
+        })}
+      >
+        <Swap />
+      </div>
+      <div
+        className={classNames({
+          hidden: activeTab !== 'add',
+        })}
+      >
+        <AddLiquidity />
+      </div>
+
+      <div
+        className={classNames({
+          hidden: activeTab !== 'remove',
+        })}
+      >
+        <RemoveLiquidity />
+      </div>
     </>
   )
 }

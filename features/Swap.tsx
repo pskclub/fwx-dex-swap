@@ -2,24 +2,11 @@ import React from 'react'
 import { Button, Chip, Input } from '@nextui-org/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid'
 import { CardMain } from '@/components/CardMain'
-import dynamic from 'next/dynamic'
 import { useWatchAccount } from '@/hooks/useWatchAccount'
-
-const RequireConnected = dynamic(async () => import('../components/RequireConnected'), {
-  ssr: true,
-  loading: () => (
-    <Button
-      className={'mt-4 text-xl font-semibold'}
-      isLoading={true}
-      color="primary"
-      radius={'sm'}
-      size={'lg'}
-      fullWidth
-    >
-      Connect Wallet
-    </Button>
-  ),
-})
+import { useReadContract, useReadContracts } from 'wagmi'
+import { erc20Abi } from 'abitype/abis'
+import { formatUnits } from 'viem'
+import { RequireConnected } from '@/components/RequireConnected'
 
 const inputClassNames = {
   label:
@@ -44,9 +31,74 @@ const inputClassNames = {
   ],
 }
 
+const ETH_ADDRESS = '0xd66c6B4F0be8CE5b39D52E0Fd1344c389929B378'
+const WBNB_ADDRESS = '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd'
+
 export const Swap = () => {
   const [expand, setExpand] = React.useState(false)
   const account = useWatchAccount()
+
+  const ETHQery = useReadContracts({
+    contracts: [
+      {
+        abi: erc20Abi,
+        functionName: 'symbol',
+        address: ETH_ADDRESS,
+      },
+      {
+        abi: erc20Abi,
+        functionName: 'decimals',
+        address: ETH_ADDRESS,
+      },
+    ],
+    allowFailure: false,
+
+    query: {
+      staleTime: Infinity,
+    },
+  })
+
+  const WBNBQuery = useReadContracts({
+    contracts: [
+      {
+        abi: erc20Abi,
+        functionName: 'symbol',
+        address: ETH_ADDRESS,
+      },
+      {
+        abi: erc20Abi,
+        functionName: 'decimals',
+        address: ETH_ADDRESS,
+      },
+    ],
+    allowFailure: false,
+
+    query: {
+      staleTime: Infinity,
+    },
+  })
+
+  const EthBalance = useReadContract(
+    account.address
+      ? {
+          abi: erc20Abi,
+          functionName: 'balanceOf',
+          address: ETH_ADDRESS,
+          args: [account.address],
+        }
+      : undefined
+  )
+
+  const WBNBBalance = useReadContract(
+    account.address
+      ? {
+          abi: erc20Abi,
+          functionName: 'balanceOf',
+          address: WBNB_ADDRESS,
+          args: [account.address],
+        }
+      : undefined
+  )
 
   return (
     <CardMain>
@@ -55,7 +107,11 @@ export const Swap = () => {
           <p className={'text-sm text-gray-200'}>You pay</p>
           {account.isConnected && (
             <p className={'text-xs text-white'}>
-              <span className={'text-gray-400'}>Balance:</span> 200
+              <span className={'text-gray-400'}>Balance:</span>{' '}
+              {formatUnits(
+                EthBalance.isSuccess ? EthBalance.data : 0n,
+                ETHQery.isSuccess ? ETHQery.data[1] : 18
+              )}
             </p>
           )}
         </div>
@@ -98,7 +154,11 @@ export const Swap = () => {
           <p className={'text-sm text-gray-200'}>You Receive</p>
           {account.isConnected && (
             <p className={'text-xs text-white'}>
-              <span className={'text-gray-400'}>Balance:</span> 200
+              <span className={'text-gray-400'}>Balance:</span>{' '}
+              {formatUnits(
+                WBNBBalance.isSuccess ? WBNBBalance.data : 0n,
+                WBNBQuery.isSuccess ? WBNBQuery.data[1] : 18
+              )}
             </p>
           )}
         </div>
