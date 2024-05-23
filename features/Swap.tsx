@@ -260,8 +260,11 @@ export const Swap = () => {
                     type="number"
                     placeholder="0"
                     size={'sm'}
+                    className={'pb-0.5'}
                     classNames={inputSmallClassNames}
-                    endContent={'%'}
+                    endContent={
+                      <div className={'pt-0.5 text-xs group-data-[focus=true]:hidden'}>%</div>
+                    }
                   />
                 </div>
               )}
